@@ -1,0 +1,12 @@
+# dependencies
+/node_modules
+
+# production
+/build
+/dist
+
+#parcel
+.parcel-cache
+
+#cache
+.cache
