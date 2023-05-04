@@ -1,5 +1,13 @@
 .profile {
     align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.profile__header {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-top: 2.1rem;
+    margin-bottom: 6.0rem;
 }
 
 .profile__inputs-container {
@@ -7,11 +15,35 @@
     flex-direction: column;
     align-items: flex-start;
     pointer-events: none;
+    margin-bottom: 6.0rem;
 }
 
 .profile__label {
+    position: relative;
+    font-size: 1.3rem;
+    top: 1.7rem;
+    font-weight: 500;
+}
+
+.profile__input {
+    border: none;
+    outline: none;
+    border-bottom: 0.1rem solid var(--profile-input-border);
+    width: 51.0rem;
+    margin-bottom: 1.0rem;
+    @mixin text #999999, 1.3rem, 1.3rem;
     text-align: right;
-    clear: both;
-    float: left;
-    margin-right: 15px;
+    padding-bottom: 1rem;
+}
+
+.profile__link {
+    @mixin text var(--main-blue), 1.3rem, 1.3rem;
+    text-decoration: none;
+    margin-bottom: 2.1rem;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.red-link {
+    @mixin text #FF0000, 1.3rem, 1.3rem;
 }
