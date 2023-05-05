@@ -11,11 +11,11 @@
 
 <body>
     <main class="container profile">
-        <img src="../../asserts/ProfileImg.png" alt="Default profile photo" />
+        <img src="../../asserts/ProfileImg.png" alt="Default profile photo" class="image" />
         <h5 class="profile__header">Иван</h5>
-        {{> profileInputs }}
-        <a class="profile__link" href="/">Изменить данные</a>
-        <a class="profile__link" href="/">Изменить пароль</a>
+        {{> profileInputs disabled=true }}
+        <a class="profile__link" href="./editProfile.hbs">Изменить данные</a>
+        <a class="profile__link" href="./editPassword.hbs">Изменить пароль</a>
         <a class="profile__link red-link" href="/">Выйти</a>
     </main>
 </body>

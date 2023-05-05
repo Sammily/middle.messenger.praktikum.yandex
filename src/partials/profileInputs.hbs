@@ -1,3 +1,24 @@
+{{#if disabled}}
+<section class="profile__inputs-container">
+    <label for="email" class="profile__label">Почта</label>
+    <input type="email" name="email" class="profile__input disabled" value="pochta@yandex.ru" />
+
+    <label for="login" class="profile__label">Логин</label>
+    <input type="text" name="login" class="profile__input disabled" value="IvanIvanov" />
+
+    <label for="name" class="profile__label">Имя</label>
+    <input type="text" name="name" class="profile__input disabled" value="Иван" />
+
+    <label for="last-name" class="profile__label">Фамилия</label>
+    <input type="text" name="last-name" class="profile__input disabled" value="Иванов" />
+
+    <label for="nickname" class="profile__label">Имя в чате</label>
+    <input type="text" name="nickname" class="profile__input disabled" value="Иван" />
+
+    <label for="phone" class="profile__label">Телефон</label>
+    <input type="phone" name="phone" class="profile__input disabled" value="+ 7 (900) 123-45-67" />
+</section>
+{{else}}
 <section class="profile__inputs-container">
     <label for="email" class="profile__label">Почта</label>
     <input type="email" name="email" class="profile__input" value="pochta@yandex.ru" />
@@ -17,3 +38,4 @@
     <label for="phone" class="profile__label">Телефон</label>
     <input type="phone" name="phone" class="profile__input" value="+ 7 (900) 123-45-67" />
 </section>
+{{/if}}
