@@ -24,3 +24,20 @@
 .modal__header {
   @mixin text #1E1E1E, 1.5rem, 2.0rem;
 }
+
+.modal__input {
+  opacity: 0;
+	position: absolute;
+  width: 12.2rem;
+  overflow: hidden;
+}
+
+.modal__content {
+  @mixin text var(--main-blue), 1.2rem, 1.6rem;
+  text-decoration-line: underline;
+  width: 12.2rem;
+}
+
+.modal__content + .modal__input {
+  cursor: pointer;
+}
