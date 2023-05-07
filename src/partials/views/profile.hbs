@@ -14,7 +14,9 @@
         {{> sideButton }}
         <img src="../../asserts/ProfileImg.png" alt="Default profile photo" class="image" />
         <h5 class="profile__header">Иван</h5>
-        {{> profileInputs disabled=true }}
+        <form class="profile__inputs-container">
+            {{> profileInputs disabled=true }}
+        </form>
         <a class="profile__link" href="./editProfile.hbs">Изменить данные</a>
         <a class="profile__link" href="./editPassword.hbs">Изменить пароль</a>
         <a class="profile__link red-link" href="/">Выйти</a>
