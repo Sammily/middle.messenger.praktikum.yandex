@@ -1,0 +1,37 @@
+{{#if disabled}}
+<label for="email" class="profile__label">Почта</label>
+<input type="email" name="email" class="profile__input disabled" value="pochta@yandex.ru" />
+
+<label for="login" class="profile__label">Логин</label>
+<input type="text" name="login" class="profile__input disabled" value="IvanIvanov" />
+
+<label for="first_name" class="profile__label">Имя</label>
+<input type="text" name="first_name" class="profile__input disabled" value="Иван" />
+
+<label for="second_name" class="profile__label">Фамилия</label>
+<input type="text" name="second_name" class="profile__input disabled" value="Иванов" />
+
+<label for="display_name" class="profile__label">Имя в чате</label>
+<input type="text" name="display_name" class="profile__input disabled" value="Иван" />
+
+<label for="phone" class="profile__label">Телефон</label>
+<input type="phone" name="phone" class="profile__input disabled" value="+ 7 (900) 123-45-67" />
+{{else}}
+<label for="email" class="profile__label">Почта</label>
+<input type="email" name="email" class="profile__input" value="pochta@yandex.ru" />
+
+<label for="login" class="profile__label">Логин</label>
+<input type="text" name="login" class="profile__input" value="IvanIvanov" />
+
+<label for="first_name" class="profile__label">Имя</label>
+<input type="text" name="first_name" class="profile__input" value="Иван" />
+
+<label for="second_name" class="profile__label">Фамилия</label>
+<input type="text" name="second_name" class="profile__input" value="Иванов" />
+
+<label for="display_name" class="profile__label">Имя в чате</label>
+<input type="text" name="display_name" class="profile__input" value="Иван" />
+
+<label for="phone" class="profile__label">Телефон</label>
+<input type="phone" name="phone" class="profile__input" value="+ 7 (900) 123-45-67" />
+{{/if}}
