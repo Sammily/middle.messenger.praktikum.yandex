@@ -1,4 +1,4 @@
-import {LoginPage} from './components/LoginPage';
+import {LoginPage} from './pages/LoginPage';
 
 window.addEventListener('DOMContentLoaded', () => {
     function render(query: string, block: LoginPage) {
