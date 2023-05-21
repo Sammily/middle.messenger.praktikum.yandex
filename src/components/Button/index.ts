@@ -1,31 +1,13 @@
-import { Block } from "../../core/Block";
+import { Block } from '../../core/Block';
+import template from './button.hbs';
 
-class Button extends Block {
+export class Button extends Block {
+  constructor(props: any) {
+    super("div", props)
+  }
 
-    constructor(props: {} | undefined) {
-      super("button", props);
-    }
-  
     render() {
-          // В проекте должен быть ваш собственный шаблонизатор
-      return `<div>${this.props.text}</div>`;
-    }
+        console.log(this.props);
+    return this.compile(template, { ...this.props});
   }
-  
-  function render(query: string, block: Button) {
-    const root = document.querySelector(query);
-    root!.appendChild(block.getContent());
-    return root;
-  }
-  
-  const button = new Button({
-          text: 'Click me',
-  });
-
-  render(".app", button);
-  
-setTimeout(() => {
-    button.setProps({
-      text: 'Click me, please',
-    });
-  }, 1000);
+}

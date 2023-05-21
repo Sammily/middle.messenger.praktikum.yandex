@@ -52,23 +52,27 @@ export class Block {
   }
   
   _registerEvents(eventBus: EventBus) {
-    eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
   
   _createResources() {
-    const { tagName } = this._meta;
-    this._element = this._createDocumentElement(tagName);
+      const { tagName } = this._meta;
+      console.log(tagName);
+      this._element = this._createDocumentElement(tagName);
   }
   
-  init() {
-    this._createResources();
+  _init() {
+      this._createResources();
+      this.init();
       this.eventBus().emit(Block.EVENTS.FLOW_CDM);
       // or render???
       //this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-  }
+    }
+    
+    init() {}
   
     _componentDidMount() {
       //or without render???
@@ -76,7 +80,7 @@ export class Block {
     this.componentDidMount();
   }
 
-  componentDidMount(oldProps?: undefined) {}
+  componentDidMount() {}
   
   dispatchComponentDidMoun() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -107,15 +111,12 @@ export class Block {
   
   _render() {
     const block = this.render();
-    // Этот небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно не в строку компилировать (или делать это правильно),
-    // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-    this._element!.innerHTML = block;
+    this._element!.innerHTML = '';
+    this._element!.append(block);
   }
 
-    render(): string {
-        return '';
+    render(): DocumentFragment {
+        return new DocumentFragment();
   }
   
   getContent() {
@@ -153,13 +154,28 @@ export class Block {
             propsAndStubs[key] = `<div data-id="${child._id}"></div>`
         });
 
-        return template(propsAndStubs);        
+        const html = template(propsAndStubs);
+        const temp = document.createElement('template');
+        temp.innerHTML = html;
+
+        Object.values(this.children).forEach(child => {
+            const stub = temp.content.querySelector(`[data-id="${child._id}"]`);
+            
+            if (!stub) {
+                return
+            }
+
+            stub.replaceWith(child.getContent());
+        });
+
+        return temp.content;       
     }
   
-  _createDocumentElement(tagName: string) {
-    const element = document.createElement(tagName);
-    element.setAttribute('data-id', this._id);
-    return element;
+    _createDocumentElement(tagName: string) {
+        console.log(tagName);
+        const element = document.createElement(tagName);
+        element.setAttribute('data-id', this._id);
+        return element;
   }
   
     show() {

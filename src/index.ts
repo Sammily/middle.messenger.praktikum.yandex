@@ -8,9 +8,10 @@ window.addEventListener('DOMContentLoaded', () => {
       }
       
       const loginPage = new LoginPage({
-        text: "Some text",
-          settings: {withInternalID: true},
+        text: "Login"
       });
+    
+
     
       render(".app", loginPage);
 });
