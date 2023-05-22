@@ -7,11 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
         return root;
       }
       
-      const loginPage = new LoginPage({
-        text: "Login"
-      });
-    
-
-    
+      const loginPage = new LoginPage({});
+        
       render(".app", loginPage);
 });

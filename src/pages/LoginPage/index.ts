@@ -11,19 +11,13 @@ export class LoginPage extends Block {
     }
   
     init() {
-        this.children.button = new Button({ text: 'Войти' });
+        this.children.button = new Button({ buttonClass: 'btn', type: 'submit', buttonText: 'Войти' });
         this.children.input = new Input({ forAndName: 'login', labelClass: 'label', labelText: 'Логин', inputType: 'text', InputClass: 'input'});
-        this.children.input2 = new Input({ forAndName: 'password', labelClass: 'label', labelText: 'Пароль', inputType: 'text', InputClass: 'input'});
+        this.children.input2 = new Input({ forAndName: 'password', labelClass: 'label', labelText: 'Пароль', inputType: 'password', InputClass: 'input'});
     }
 
     render() {
-        console.log(this.children);
-        const { text, _id } = this.props;
-    
-        console.log(_id);
-        console.log(this.props);
-    
-        return this.compile(template, { text });
+        return this.compile(template, {});
       }
 }
   
