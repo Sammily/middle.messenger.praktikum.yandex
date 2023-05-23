@@ -1,13 +1,11 @@
 import { Block } from '../../core/Block';
-import template from './button.hbs';
+import template from './sideButton.hbs';
 
 type ButtonProps = {
     buttonClass: string;
-    type: string;
-    buttonText: string;
 }
 
-export class Button extends Block {
+export class SideButton extends Block {
   constructor(props: ButtonProps) {
     super("div", props)
   }

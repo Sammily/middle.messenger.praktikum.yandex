@@ -60,7 +60,6 @@ export class Block {
   
   _createResources() {
       const { tagName } = this._meta;
-      console.log(tagName);
       this._element = this._createDocumentElement(tagName);
   }
   
@@ -172,7 +171,6 @@ export class Block {
     }
   
     _createDocumentElement(tagName: string) {
-        console.log(tagName);
         const element = document.createElement(tagName);
         element.setAttribute('data-id', this._id);
         return element;

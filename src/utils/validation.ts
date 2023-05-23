@@ -2,8 +2,6 @@ export function validateForms() {
     const form = document.getElementById('form');
     const inputs = document.querySelectorAll('.input');
     const errorLabels = document.querySelectorAll('.error');
-    console.log(inputs);
-    console.log(form);
 
     const regExpForEmail = /^[A-Z0-9-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
     const regExpForName = /^[A-ZА-Я]{1}[a-zа-я-]{2,30}$/;

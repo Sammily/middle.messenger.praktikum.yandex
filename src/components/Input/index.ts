@@ -7,6 +7,8 @@ type InputProps = {
     labelText: string;
     inputType: string;
     InputClass: string;
+    value?: string;
+    disabled?: string;
 }
 
 export class Input extends Block {
@@ -15,7 +17,6 @@ export class Input extends Block {
   }
 
     render() {
-        console.log(this.props);
     return this.compile(template, { ...this.props});
   }
 }
