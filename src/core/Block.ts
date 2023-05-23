@@ -75,14 +75,14 @@ export class Block {
     init() {}
   
     _componentDidMount() {
-      //or without render???
-    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-    this.componentDidMount();
-  }
+        this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+        this.componentDidMount();
+    }
 
-  componentDidMount() {}
+    componentDidMount() {
+  }
   
-  dispatchComponentDidMoun() {
+  dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
   

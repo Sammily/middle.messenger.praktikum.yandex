@@ -1,3 +1,4 @@
+import { validateForms } from './utils/validation';
 import {LoginPage} from './pages/LoginPage';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -5,9 +6,10 @@ window.addEventListener('DOMContentLoaded', () => {
         const root = document.querySelector(query);
         root!.appendChild(block.getContent());
         return root;
-      }
-      
-      const loginPage = new LoginPage({});
+    }
+
+    const loginPage = new LoginPage({});
         
-      render(".app", loginPage);
+    render(".app", loginPage);
+    validateForms();
 });
