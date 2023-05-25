@@ -9,6 +9,8 @@ import { Registration } from './pages/Registration';
 import { Error400 } from './pages/Page400';
 import { Error500 } from './pages/Page500';
 import { AddDeleteUserPanel } from './components/AddDeleteUserPanel';
+import { Chat } from './pages/Chat';
+import { ChatActive } from './pages/ChatActive';
 
 window.addEventListener('DOMContentLoaded', () => {
     const pages = [
@@ -21,6 +23,8 @@ window.addEventListener('DOMContentLoaded', () => {
         { link: '/error400', label: 'error400' },
         { link: '/error500', label: 'error500' },
         { link: '/addDeleteUser', label: 'addDeleteUser' },
+        { link: '/chat', label: 'chat' },
+        { link: '/chatActive', label: 'chatActive' }
     ]
     const loginPage = new LoginPage({});
     const profilePage = new Profile({});
@@ -31,6 +35,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const error400 = new Error400({});
     const error500 = new Error500({});
     const addDeleteUser = new AddDeleteUserPanel({});
+    const chat = new Chat({});
+    const chatActive = new ChatActive({});
 
     const allPages = new AllPages({pages});
         
@@ -63,6 +69,12 @@ window.addEventListener('DOMContentLoaded', () => {
             break;
         case "/addDeleteUser":
             renderDOM(addDeleteUser);
+            break;
+        case "/chat":
+            renderDOM(chat);
+            break;
+        case "/chatActive":
+            renderDOM(chatActive);
             break;
         
     }
