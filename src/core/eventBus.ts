@@ -1,31 +1,32 @@
+
 export class EventBus {
     listeners: { [x: string]: any[]; } = {};
-    
   
-    on<T>(event: string | number, callback: T)  {
+    on(event: string, callback: any ) {
       if (!this.listeners[event]) {
         this.listeners[event] = [];
       }
+  
       this.listeners[event].push(callback);
     }
   
-    off(event: string | number, callback: () => void) {
+    off(event: string, callback: () => void) {
       if (!this.listeners[event]) {
         throw new Error(`Нет события: ${event}`);
       }
+  
       this.listeners[event] = this.listeners[event].filter(
-        listener => listener !== callback);
+        listener => listener !== callback
+      );
     }
   
-    emit(event: string | number, ...args: [] ) {
+    emit(event: string, ...args: ({ [x: string]: object | string; } | undefined)[]) {
       if (!this.listeners[event]) {
-        throw new Error(`Нет события: ${event}`);
-        }
-
-      this.listeners[event].forEach(listener => {
-          listener(...args);
+        throw new Event(`Нет события: ${event}`);
+      }
+      
+        this.listeners[event].forEach(listener => {
+        listener(...args);
       });
     }
   }
-  
-  const eventBus = new EventBus();

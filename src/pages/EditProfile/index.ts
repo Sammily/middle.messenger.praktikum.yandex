@@ -1,10 +1,11 @@
 import { Block } from "../../core/Block";
-import template from "./profile.hbs";
+import template from "./editProfile.hbs";
 import { Input } from '../../components/Input';
 import { SideButton } from "../../components/sideButton";
 import { validateForms } from "../../utils/validation";
+import { Button } from "../../components/Button";
 
-export class Profile extends Block {
+export class EditProfile extends Block {
     [x: string]: any;
 
     constructor(props: {} | undefined) {
@@ -12,6 +13,7 @@ export class Profile extends Block {
     }
 
     init() {
+        this.children.button = new Button({ buttonClass: 'btn', type: 'submit', buttonText: 'Сохранить' });
         this.children.input = new Input({ forAndName: 'email', labelClass: 'profile__label', labelText: 'Почта', inputType: 'email', InputClass: 'profile__input disabled', value: 'pochta@yandex.ru' });
         this.children.input2 = new Input({ forAndName: 'login', labelClass: 'profile__label', labelText: 'Логин', inputType: 'text', InputClass: 'profile__input', value: 'IvanIvanov' });
         this.children.input3 = new Input({ forAndName: 'first_name', labelClass: 'profile__label', labelText: 'Имя', inputType: 'text', InputClass: 'profile__input', value: 'Иван' });

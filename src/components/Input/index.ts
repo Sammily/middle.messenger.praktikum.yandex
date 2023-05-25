@@ -13,7 +13,7 @@ type InputProps = {
 
 export class Input extends Block {
   constructor(props: InputProps) {
-    super("div", props)
+    super(props)
   }
 
     render() {

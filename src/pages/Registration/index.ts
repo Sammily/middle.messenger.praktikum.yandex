@@ -7,7 +7,7 @@ export class Registration extends Block {
     [x: string]: any;
 
     constructor(props: {} | undefined) {
-      super("div", props);
+      super(props);
     }
    
     init() {
@@ -22,7 +22,7 @@ export class Registration extends Block {
     }
 
     render() {
-        return this.compile(template, {});
+        return this.compile(template, {...this.props});
       }
 }
   
