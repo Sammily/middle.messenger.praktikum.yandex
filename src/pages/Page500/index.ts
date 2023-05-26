@@ -3,9 +3,8 @@ import { Block } from "../../core/Block";
 import template from "./page500.hbs"
 
 export class Error500 extends Block {
-    [x: string]: any;
 
-    constructor(props: {} | undefined) {
+    constructor(props: object | undefined) {
         super(props);  
     }
 

@@ -4,7 +4,7 @@ import { Image } from '../Image';
 import buttonImg from "../../assets/addUserbutton.png";
 
 export class AddDeleteUserPanel extends Block {
-  constructor(props: {} | undefined) {
+  constructor(props: object | undefined) {
     super(props)
   }
 

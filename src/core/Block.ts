@@ -11,7 +11,7 @@ export class Block {
   
     _element: null | HTMLElement = null;
     _meta: { props: object };
-    _id: string = '';
+    _id = '';
   
     props:  {[index: string]: object | string};
     eventBus: () => EventBus;
@@ -122,8 +122,6 @@ export class Block {
   
   _render() {
     const block = this.render();
-    //this._element!.innerHTML = '';
-    //this._element!.append(block);
     const newElement = block.firstElementChild as HTMLElement;
     this._element!.replaceWith(newElement);
     this._element = newElement;
@@ -140,20 +138,15 @@ export class Block {
   }
   
   _makePropsProxy(props: {[index: string ]: object | string}) {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
     const self = this;
     const proxy = new Proxy(props, {
       get(target, prop: string) {
         const value = target[prop];
-            //return value;
-            //or
             return typeof value === "function" ? value.bind(target) : value;
       },
         set(target, prop: string, value) {
         const oldTarget = { ...target };
         target[prop] = value;
-          //self.eventBus().emit(Block.EVENTS.FLOW_CDU);
           self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },

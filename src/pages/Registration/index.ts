@@ -4,9 +4,8 @@ import { Button } from "../../components/Button";
 import { Input } from '../../components/Input';
 
 export class Registration extends Block {
-    [x: string]: any;
 
-    constructor(props: {} | undefined) {
+    constructor(props: object | undefined) {
       super(props);
     }
    

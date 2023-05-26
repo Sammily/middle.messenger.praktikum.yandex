@@ -3,7 +3,7 @@ import template from './chat.hbs';
 import { Sidebar } from '../../components/Sidebar';
 
 export class Chat extends Block {
-  constructor(props: {} | undefined) {
+  constructor(props: object | undefined) {
     super(props)
     }
     

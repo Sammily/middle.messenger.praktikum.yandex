@@ -32,8 +32,16 @@
     }
 }
 
-.disabled {
+.profile__input-disabled {
     pointer-events: none;
+    border: none;
+    outline: none;
+    border-bottom: 0.1rem solid var(--profile-input-border);
+    width: 51.0rem;
+    margin-bottom: 1.0rem;
+    @mixin text #999999, 1.3rem, 1.3rem;
+    text-align: right;
+    padding-bottom: 1rem;
 }
 
 .profile__label {

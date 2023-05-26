@@ -4,9 +4,8 @@ import { Image } from '../Image';
 import arrowButton from "../../assets/arrowButton.png";
 
 export class SideButton extends Block {
-    [x: string]: any;
 
-  constructor(props: {} | undefined) {
+  constructor(props: object | undefined) {
     super(props)
   }
 

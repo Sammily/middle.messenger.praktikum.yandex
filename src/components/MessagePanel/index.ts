@@ -7,7 +7,7 @@ import clipButton from "../../assets/clipButton.png";
 import arrowButton from "../../assets/arrowButton.png";
 
 export class MessagePanel extends Block {
-  constructor(props: {} | undefined) {
+  constructor(props: object | undefined) {
     super(props)
   }
     

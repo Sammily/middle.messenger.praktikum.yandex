@@ -8,7 +8,6 @@ type InputProps = {
     inputType: string;
     InputClass: string;
     value?: string;
-    disabled?: string;
 }
 
 export class Input extends Block {

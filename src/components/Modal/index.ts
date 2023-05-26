@@ -3,7 +3,7 @@ import { Block } from '../../core/Block';
 import template from './modal.hbs';
 
 export class Modal extends Block {
-  constructor(props: {} | undefined) {
+  constructor(props: object | undefined) {
     super(props)
   }
     init() {

@@ -2,7 +2,7 @@ import { Block } from '../../core/Block';
 import template from './errorPage.hbs';
 
 export class ErrorPage extends Block {
-  constructor(props: {} | undefined) {
+  constructor(props: object | undefined) {
     super(props)
   }
 

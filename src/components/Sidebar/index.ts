@@ -3,7 +3,7 @@ import { Block } from '../../core/Block';
 import template from './sidebar.hbs';
 
 export class Sidebar extends Block {
-  constructor(props: {} | undefined) {
+  constructor(props: object | undefined) {
     super(props)
     }
     

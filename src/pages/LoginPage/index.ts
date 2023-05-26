@@ -5,9 +5,8 @@ import { Input } from '../../components/Input';
 import { validateForms } from "../../utils/validation";
 
 export class LoginPage extends Block {
-    [x: string]: any;
 
-    constructor(props: {} | undefined) {
+    constructor(props: object | undefined) {
         super(props);  
     }
 

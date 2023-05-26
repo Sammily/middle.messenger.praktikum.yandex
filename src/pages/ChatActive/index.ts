@@ -4,7 +4,7 @@ import { Sidebar } from '../../components/Sidebar';
 import { MessagePanel } from '../../components/MessagePanel';
 
 export class ChatActive extends Block {
-  constructor(props: {} | undefined) {
+  constructor(props: object | undefined) {
     super(props)
     }
     

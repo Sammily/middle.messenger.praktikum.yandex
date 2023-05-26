@@ -4,7 +4,7 @@ import { Image } from '../Image';
 import userImg from "../../assets/usersImg.png";
 
 export class ChatSidebar extends Block {
-  constructor(props: {} | undefined) {
+  constructor(props: object | undefined) {
     super(props)
     }
     

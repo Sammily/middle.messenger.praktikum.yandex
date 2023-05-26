@@ -8,9 +8,8 @@ import profilePhoto from "../../assets/ProfileImg.png"
 import { Image } from "../../components/Image";
 
 export class EditPassword extends Block {
-    [x: string]: any;
 
-    constructor(props: {} | undefined) {
+    constructor(props: object | undefined) {
         super(props);  
     }
 
