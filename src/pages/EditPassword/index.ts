@@ -4,6 +4,8 @@ import { Input } from '../../components/Input';
 import { SideButton } from "../../components/sideButton";
 import { validateForms } from "../../utils/validation";
 import { Button } from "../../components/Button";
+import profilePhoto from "../../assets/ProfileImg.png"
+import { Image } from "../../components/Image";
 
 export class EditPassword extends Block {
     [x: string]: any;
@@ -14,10 +16,11 @@ export class EditPassword extends Block {
 
     init() {
         this.children.button = new Button({ buttonClass: 'btn', type: 'submit', buttonText: 'Сохранить' });
-        this.children.input = new Input({ forAndName: 'oldPassword', labelClass: 'label', labelText: 'Старый пароль', inputType: 'password', InputClass: 'input', value: '•••••••••' });
-        this.children.input1 = new Input({ forAndName: 'newPassword', labelClass: 'label', labelText: 'Новый пароль', inputType: 'password', InputClass: 'input', value: '•••••••••••' });
-        this.children.input2 = new Input({ forAndName: 'newPasswordAgain', labelClass: 'label', labelText: 'Повторите новый пароль', inputType: 'password', InputClass: 'input', value: '•••••••••••' });
+        this.children.input = new Input({ forAndName: 'oldPassword', labelClass: 'profile__label', labelText: 'Старый пароль', inputType: 'password', InputClass: 'profile__input', value: '•••••••••' });
+        this.children.input1 = new Input({ forAndName: 'newPassword', labelClass: 'profile__label', labelText: 'Новый пароль', inputType: 'password', InputClass: 'profile__input', value: '•••••••••••' });
+        this.children.input2 = new Input({ forAndName: 'newPasswordAgain', labelClass: 'profile__label', labelText: 'Повторите новый пароль', inputType: 'password', InputClass: 'profile__input', value: '•••••••••••' });
         this.children.sideButton = new SideButton({ buttonClass: 'side-btn' });
+        this.children.image = new Image({ src: profilePhoto, alt: "Default profile photo", class: "image" });
         validateForms();
     }
 

@@ -1,6 +1,7 @@
 import { Block } from '../../core/Block';
 import template from "./sideButton.hbs";
 import { Image } from '../Image';
+import arrowButton from "../../assets/arrowButton.png";
 
 export class SideButton extends Block {
     [x: string]: any;
@@ -10,7 +11,7 @@ export class SideButton extends Block {
   }
 
     init() {
-        this.children.image = new Image({ src: "../../assets/arrowButton.png", alt: "arrow button", class: "image"});
+        this.children.image = new Image({ src: arrowButton, alt: "arrow button", class: "image"});
     }
     
     render() {
