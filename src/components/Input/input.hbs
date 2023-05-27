@@ -1,5 +1,8 @@
 <div class="input-container">
     <label for={{forAndName}} class={{labelClass}}>{{labelText}}</label>
-    <input type={{inputType}} name={{forAndName}} class={{InputClass}} value={{value}}>
-    <label class="error">Error message</label>
+    <input type={{inputType}} name={{forAndName}} class={{inputClass}} value={{value}}>
+    {{#if error}}
+    <label class="error">{{error}}</label>
+    {{/if}}
+
 </div>

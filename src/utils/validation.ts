@@ -1,3 +1,5 @@
+import { Block } from 'core/Block';
+
 export function validateForms() {
     const form = document.getElementById('form');
     const inputs = document.querySelectorAll('.input');
@@ -10,7 +12,11 @@ export function validateForms() {
     const regExpForLogin = /^[A-Za-z][A-Za-z0-9_-]{2,19}$/;
     
     function validateInputs(inputValue: string) {
-        return regExpForLogin.test(inputValue), regExpForPassword.test(inputValue), regExpForEmail.test(inputValue), regExpForName.test(inputValue), regExpForPhone.test(inputValue);
+        return regExpForLogin.test(inputValue), 
+                regExpForPassword.test(inputValue), 
+                regExpForEmail.test(inputValue), 
+                regExpForName.test(inputValue), 
+                regExpForPhone.test(inputValue);
     }
     function validateInput(inputValue: string) {
         return validateInputs(inputValue);
@@ -63,4 +69,25 @@ export function validateForms() {
             }
         }
     });
+}
+
+const regExpForLogin = /^[A-Za-z][A-Za-z0-9_-]{2,19}$/;
+
+export function loginValidation(elem: Block) {
+    const input = elem.element!.children[1] ;
+    const inputValue = (elem.element!.children[1] as HTMLInputElement).value;
+    const result = regExpForLogin.test(inputValue);
+    console.log(inputValue);
+    console.log(result);
+
+    if (!result && inputValue !== '') {
+        (input as HTMLInputElement).style.color = "#FF2F2F";
+        elem.setProps({error: 'Error@'});
+        elem.setProps({value: inputValue});
+
+    } else {
+        elem.setProps({error: ''});
+        elem.setProps({value: inputValue});
+    }
+
 }

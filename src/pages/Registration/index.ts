@@ -11,13 +11,13 @@ export class Registration extends Block {
    
     init() {
         this.children.button = new Button({ buttonClass: 'btn', type: 'submit', buttonText: 'Зарегистрироваться' });
-        this.children.input = new Input({ forAndName: 'email', labelClass: 'label', labelText: 'Почта', inputType: 'email', InputClass: 'input' });
-        this.children.input2 = new Input({ forAndName: 'login', labelClass: 'label', labelText: 'Логин', inputType: 'text', InputClass: 'input' });
-        this.children.input3 = new Input({ forAndName: 'first_name', labelClass: 'label', labelText: 'Имя', inputType: 'text', InputClass: 'input' });
-        this.children.input4 = new Input({ forAndName: 'second_name', labelClass: 'label', labelText: 'Фамилия', inputType: 'text', InputClass: 'input' });    
-        this.children.input5 = new Input({ forAndName: 'phone', labelClass: 'label', labelText: 'Логин', inputType: 'phone', InputClass: 'input'});
-        this.children.input6 = new Input({ forAndName: 'password', labelClass: 'label', labelText: 'Пароль', inputType: 'password', InputClass: 'input' });
-        this.children.input7 = new Input({ forAndName: 'password-second', labelClass: 'label', labelText: 'Пароль ещё раз', inputType: 'password', InputClass: 'input'});
+        this.children.input = new Input({ forAndName: 'email', labelClass: 'label', labelText: 'Почта', inputType: 'email', inputClass: 'input' });
+        this.children.input2 = new Input({ forAndName: 'login', labelClass: 'label', labelText: 'Логин', inputType: 'text', inputClass: 'input' });
+        this.children.input3 = new Input({ forAndName: 'first_name', labelClass: 'label', labelText: 'Имя', inputType: 'text', inputClass: 'input' });
+        this.children.input4 = new Input({ forAndName: 'second_name', labelClass: 'label', labelText: 'Фамилия', inputType: 'text', inputClass: 'input' });    
+        this.children.input5 = new Input({ forAndName: 'phone', labelClass: 'label', labelText: 'Логин', inputType: 'phone', inputClass: 'input'});
+        this.children.input6 = new Input({ forAndName: 'password', labelClass: 'label', labelText: 'Пароль', inputType: 'password', inputClass: 'input' });
+        this.children.input7 = new Input({ forAndName: 'password-second', labelClass: 'label', labelText: 'Пароль ещё раз', inputType: 'password', inputClass: 'input'});
     }
 
     render() {

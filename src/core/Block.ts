@@ -108,7 +108,7 @@ export class Block {
     return true;
   }
   
-  setProps = (nextProps: { text: string; }) => {
+  setProps = (nextProps: any ) => {
     if (!nextProps) {
       return;
     }

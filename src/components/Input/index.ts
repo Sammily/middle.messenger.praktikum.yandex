@@ -6,8 +6,9 @@ type InputProps = {
     labelClass: string;
     labelText: string;
     inputType: string;
-    InputClass: string;
+    inputClass: string;
     value?: string;
+    error?: string;
 }
 
 export class Input extends Block {

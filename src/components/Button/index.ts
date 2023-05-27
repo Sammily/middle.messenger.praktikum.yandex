@@ -5,6 +5,9 @@ type ButtonProps = {
     buttonClass: string;
     type: string;
     buttonText: string;
+    events?: {
+      click: (evt: PointerEvent) => void;
+    };
 }
 
 export class Button extends Block {
