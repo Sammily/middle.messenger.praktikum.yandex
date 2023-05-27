@@ -55,7 +55,15 @@ export class Block {
             events: Record<string, () => void>;
         };
         Object.keys(events).forEach((eventName) => {
-            this._element?.addEventListener(eventName, events[eventName]);
+            //console.log(eventName);
+            if (eventName === 'blur' || eventName === 'focus' || eventName === 'change') {
+                this._element?.children[1].addEventListener(eventName, events[eventName]);
+                console.log(eventName, this._element);
+                
+            } else {
+                this._element?.addEventListener(eventName, events[eventName]);
+                console.log(eventName, this._element);
+            }
         });
     }
     
@@ -120,13 +128,22 @@ export class Block {
     return this._element;
   }
   
-  _render() {
-    const block = this.render();
-    const newElement = block.firstElementChild as HTMLElement;
-    this._element!.replaceWith(newElement);
-    this._element = newElement;
+    _render() {
+        const block = this.render();
+        const newElement = block.firstElementChild as HTMLElement;
+        if (document.readyState == 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                
+                this._element!.replaceWith(newElement);
+                this._element = newElement;
+                this._addEvents();
+            });
+          } else {
+            this._element!.replaceWith(newElement);
+            this._element = newElement;
+            this._addEvents();
+          }
 
-    this._addEvents();
   }
 
     render(): DocumentFragment {

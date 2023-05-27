@@ -9,6 +9,11 @@ type InputProps = {
     inputClass: string;
     value?: string;
     error?: string;
+    events?: {
+        blur?: (evt: PointerEvent) => void;
+        focus?: (evt: PointerEvent) => void;
+        change?: (evt: PointerEvent) => void;
+    }
 }
 
 export class Input extends Block {

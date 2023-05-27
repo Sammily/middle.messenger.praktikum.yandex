@@ -2,7 +2,6 @@ import { Block } from "../../core/Block";
 import template from "./editPassword.hbs";
 import { Input } from '../../components/Input';
 import { SideButton } from "../../components/sideButton";
-import { validateForms } from "../../utils/validation";
 import { Button } from "../../components/Button";
 import profilePhoto from "../../assets/ProfileImg.png"
 import { Image } from "../../components/Image";
@@ -20,12 +19,9 @@ export class EditPassword extends Block {
         this.children.input2 = new Input({ forAndName: 'newPasswordAgain', labelClass: 'profile__label', labelText: 'Повторите новый пароль', inputType: 'password', inputClass: 'profile__input', value: '•••••••••••' });
         this.children.sideButton = new SideButton({ buttonClass: 'side-btn' });
         this.children.image = new Image({ src: profilePhoto, alt: "Default profile photo", class: "image" });
-        validateForms();
     }
 
     render() {
-        console.log(this.props);
-
         return this.compile(template, this.props);
       }
 }

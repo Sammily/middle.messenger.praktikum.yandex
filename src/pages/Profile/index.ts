@@ -2,7 +2,6 @@ import { Block } from "../../core/Block";
 import template from "./profile.hbs";
 import { Input } from '../../components/Input';
 import { SideButton } from "../../components/sideButton";
-import { validateForms } from "../../utils/validation";
 import profilePhoto from "../../assets/ProfileImg.png"
 import { Image } from "../../components/Image";
 
@@ -21,7 +20,6 @@ export class Profile extends Block {
         this.children.input6 = new Input({ forAndName: 'phone', labelClass: 'profile__label', labelText: 'Логин', inputType: 'phone', inputClass: 'profile__input-disabled', value: '+79001234567'});
         this.children.sideButton = new SideButton({ buttonClass: 'side-btn' });
         this.children.image = new Image({ src: profilePhoto, alt: "Default profile photo", class: "image" });
-        validateForms();
     }
 
     render() {
