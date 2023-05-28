@@ -17,6 +17,9 @@ export class Block {
     eventBus: () => EventBus;
     children: { [x: string]: Block };
 
+    isRendering = false;
+    renderQueue:any = [];
+
     constructor(propsAndChildren = {}) {
         const { children, props } = this._getChildren(propsAndChildren);
         
@@ -55,14 +58,11 @@ export class Block {
             events: Record<string, () => void>;
         };
         Object.keys(events).forEach((eventName) => {
-            //console.log(eventName);
             if (eventName === 'blur' || eventName === 'focus' || eventName === 'change') {
                 this._element?.children[1].addEventListener(eventName, events[eventName]);
-                console.log(eventName, this._element);
                 
             } else {
                 this._element?.addEventListener(eventName, events[eventName]);
-                console.log(eventName, this._element);
             }
         });
     }
@@ -127,27 +127,41 @@ export class Block {
   get element() {
     return this._element;
   }
-  
-    _render() {
-        const block = this.render();
-        const newElement = block.firstElementChild as HTMLElement;
-        if (document.readyState == 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                
-                this._element!.replaceWith(newElement);
-                this._element = newElement;
-                this._addEvents();
-            });
-          } else {
-            this._element!.replaceWith(newElement);
-            this._element = newElement;
-            this._addEvents();
-          }
 
+  renderr() {
+    console.log('do renderrr');
+    this.isRendering = true;
+    const block = this.render();
+    const newElement = block.firstElementChild as HTMLElement;
+    this._element!.replaceWith(newElement);
+    this._element = newElement;
+    this._addEvents();
+    this.isRendering = false;
+  }
+  
+  _render() {
+    console.log(this);
+      console.log('FLAG', this.isRendering);
+      if(!this.isRendering) {
+        if(this.renderQueue.length !== 0) {
+          console.log('do queue');
+          for(let i = 0; i < this.renderQueue.length; i+=1) {
+            console.log(this);
+            this.renderQueue[i].call(this);
+          }
+          this.renderQueue = [];
+        } else {
+          console.log('render');
+          this.renderr();
+        }
+      } else {
+        this.renderQueue.push(this.renderr);
+        console.log('push queue',this.renderQueue);
+      }
   }
 
-    render(): DocumentFragment {
-        return new DocumentFragment();
+  render(): DocumentFragment {
+    return new DocumentFragment();
   }
   
   getContent() {
