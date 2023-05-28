@@ -133,25 +133,28 @@ export class Block {
     this.isRendering = true;
     const block = this.render();
     const newElement = block.firstElementChild as HTMLElement;
+    console.log('this.props.value: ',this.props.value,'replace-start');
     this._element!.replaceWith(newElement);
+    console.log('this.props.value: ',this.props.value,'replace-end');
     this._element = newElement;
     this._addEvents();
     this.isRendering = false;
   }
   
   _render() {
-    console.log(this);
+    //console.log(this);
       console.log('FLAG', this.isRendering);
       if(!this.isRendering) {
         if(this.renderQueue.length !== 0) {
           console.log('do queue');
           for(let i = 0; i < this.renderQueue.length; i+=1) {
-            console.log(this);
+            console.log('do render');
             this.renderQueue[i].call(this);
           }
           this.renderQueue = [];
+          console.log('empty?', this.renderQueue);
         } else {
-          console.log('render');
+          console.log('main render');
           this.renderr();
         }
       } else {

@@ -7,8 +7,9 @@ const regExpForPassword = /^((?=.*[0-9])(?=.*[A-Z])[0-9a-zA-Z]{8,40})$/;
 const regExpForLogin = /^[A-Za-z][A-Za-z0-9_-]{2,19}$/;
 
 export function inputValidation(elem: Block, input: Element, result: boolean, inputValue: string) {
+    console.log(inputValue);
     if (!result && inputValue !== '') {
-        elem.setProps({ error: 'Error', value: inputValue });
+        elem.setProps({ error: 'Error', value: inputValue});
         (input as HTMLInputElement).style.color = "#FF2F2F";
     }
     if (result) {
@@ -19,7 +20,9 @@ export function inputValidation(elem: Block, input: Element, result: boolean, in
 export function validation(elem: any, inputName: string) {
     const input = elem.element!.children[1] ;
     const inputValue = (elem.element!.children[1] as HTMLInputElement).value;
-    let result = false;
+    let result = regExpForLogin.test(inputValue);
+    console.log(inputValue);
+    console.log(result);
     if (inputName = 'login') {
         result = regExpForLogin.test(inputValue);
     }
@@ -35,6 +38,5 @@ export function validation(elem: any, inputName: string) {
     if (inputName = 'email') {
         result = regExpForEmail.test(inputValue);
     }
-
     inputValidation(elem, input, result, inputValue);
 }

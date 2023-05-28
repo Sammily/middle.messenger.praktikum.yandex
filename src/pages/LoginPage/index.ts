@@ -15,12 +15,13 @@ export class LoginPage extends Block {
             { click: (evt: PointerEvent) => {
                 evt.preventDefault();
                 validation(this.children.input, 'login');
-                validation(this.children.input, 'password');
+                validation(this.children.input2, 'password');
                 const form = document.getElementById('form') as HTMLFormElement;
                 const formData = new FormData(form);
                 const login = formData.get('login');
                 const password = formData.get('password');
                 console.log(login, password);
+                this.children.input.setProps({ error: 'Error', value: 'fsdfsf'});
             } 
             }
         });
@@ -28,10 +29,14 @@ export class LoginPage extends Block {
             forAndName: 'login', labelClass: 'label', labelText: 'Логин', inputType: 'text', inputClass: 'input', events:
                 {
                 focus: (evt: PointerEvent) => {
-                    validation(this.children.input, 'login')
+                    console.log('focus-start');
+                    validation(this.children.input, 'login');
+                    console.log('focus-end');
                 },
                 blur: (evt: PointerEvent) => {
-                    validation(this.children.input, 'login')
+                    console.log('blur-start');
+                    validation(this.children.input, 'login');
+                    console.log('blur-end');
                 }
         }});
         this.children.input2 = new Input({ forAndName: 'password', labelClass: 'label', labelText: 'Пароль', inputType: 'password', inputClass: 'input', events:
