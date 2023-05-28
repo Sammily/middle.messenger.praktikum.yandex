@@ -35,64 +35,64 @@ export class Registration extends Block {
         } });
         this.children.input = new Input({ forAndName: 'email', labelClass: 'label', labelText: 'Почта', inputType: 'email', inputClass: 'input', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationEmail(this.children.input);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationEmail(this.children.input);
         }
 } });
         this.children.input2 = new Input({ forAndName: 'login', labelClass: 'label', labelText: 'Логин', inputType: 'text', inputClass: 'input', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationLogin(this.children.input2);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationLogin(this.children.input2);
         }
 } });
         this.children.input3 = new Input({ forAndName: 'first_name', labelClass: 'label', labelText: 'Имя', inputType: 'text', inputClass: 'input', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationName(this.children.input3);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationName(this.children.input3);
         }
 } });
         this.children.input4 = new Input({ forAndName: 'second_name', labelClass: 'label', labelText: 'Фамилия', inputType: 'text', inputClass: 'input', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationName(this.children.input4);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationName(this.children.input4);
         }
 } });    
         this.children.input5 = new Input({ forAndName: 'phone', labelClass: 'label', labelText: 'Логин', inputType: 'phone', inputClass: 'input', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationPhone(this.children.input5);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationPhone(this.children.input5);
         }
 }});
         this.children.input6 = new Input({ forAndName: 'password', labelClass: 'label', labelText: 'Пароль', inputType: 'password', inputClass: 'input', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationPassword(this.children.input6);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationPassword(this.children.input6);
         }
 } });
         this.children.input7 = new Input({ forAndName: 'password-second', labelClass: 'label', labelText: 'Пароль ещё раз', inputType: 'password', inputClass: 'input', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationPassword(this.children.input7);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationPassword(this.children.input7);
         }
 }});

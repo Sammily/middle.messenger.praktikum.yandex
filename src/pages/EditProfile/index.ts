@@ -36,55 +36,55 @@ export class EditProfile extends Block {
         }  });
         this.children.input = new Input({ forAndName: 'email', labelClass: 'profile__label', labelText: 'Почта', inputType: 'email', inputClass: 'profile__input', value: 'pochta@yandex.ru', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationEmail(this.children.input);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationEmail(this.children.input);
         }
 }  });
         this.children.input2 = new Input({ forAndName: 'login', labelClass: 'profile__label', labelText: 'Логин', inputType: 'text', inputClass: 'profile__input', value: 'IvanIvanov', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationLogin(this.children.input2);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationLogin(this.children.input2);
         }
 }  });
         this.children.input3 = new Input({ forAndName: 'first_name', labelClass: 'profile__label', labelText: 'Имя', inputType: 'text', inputClass: 'profile__input', value: 'Иван', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationName(this.children.input3);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationName(this.children.input3);
         }
 }  });
         this.children.input4 = new Input({ forAndName: 'second_name', labelClass: 'profile__label', labelText: 'Фамилия', inputType: 'text', inputClass: 'profile__input', value: 'Иванов', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationName(this.children.input4);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationName(this.children.input4);
         }
 }  });
         this.children.input5 = new Input({ forAndName: 'display_name', labelClass: 'profile__label', labelText: 'Имя в чате', inputType: 'text', inputClass: 'profile__input', value: 'Иван', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationName(this.children.input5);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationName(this.children.input5);
         }
 }   });
         this.children.input6 = new Input({ forAndName: 'phone', labelClass: 'profile__label', labelText: 'Логин', inputType: 'phone', inputClass: 'profile__input', value: '+79001234567', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationPhone(this.children.input6);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationPhone(this.children.input6);
         }
 }});

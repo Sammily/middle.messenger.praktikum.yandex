@@ -27,19 +27,19 @@ export class LoginPage extends Block {
         this.children.input = new Input({
             forAndName: 'login', labelClass: 'label', labelText: 'Логин', inputType: 'text', inputClass: 'input', events:
                 {
-                focus: (evt: PointerEvent) => {
+                focus: () => {
                     validationLogin(this.children.input);
                 },
-                blur: (evt: PointerEvent) => {
+                blur: () => {
                     validationLogin(this.children.input);
                 }
         }});
         this.children.input2 = new Input({ forAndName: 'password', labelClass: 'label', labelText: 'Пароль', inputType: 'password', inputClass: 'input', events:
             {
-            focus: (evt: PointerEvent) => {
+            focus: () => {
                 validationPassword(this.children.input2);
             },
-            blur: (evt: PointerEvent) => {
+            blur: () => {
                 validationPassword(this.children.input2);
             }
         }});

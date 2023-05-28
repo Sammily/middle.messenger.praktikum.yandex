@@ -30,28 +30,28 @@ export class EditPassword extends Block {
         }  });
         this.children.input = new Input({ forAndName: 'oldPassword', labelClass: 'profile__label', labelText: 'Старый пароль', inputType: 'password', inputClass: 'profile__input', value: '•••••••••', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationPassword(this.children.input);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationPassword(this.children.input);
         }
 }  });
         this.children.input1 = new Input({ forAndName: 'newPassword', labelClass: 'profile__label', labelText: 'Новый пароль', inputType: 'password', inputClass: 'profile__input', value: '•••••••••••', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationPassword(this.children.input1);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationPassword(this.children.input1);
         }
 }  });
         this.children.input2 = new Input({ forAndName: 'newPasswordAgain', labelClass: 'profile__label', labelText: 'Повторите новый пароль', inputType: 'password', inputClass: 'profile__input', value: '•••••••••••', events:
         {
-        focus: (evt: PointerEvent) => {
+        focus: () => {
             validationPassword(this.children.input2);
         },
-        blur: (evt: PointerEvent) => {
+        blur: () => {
             validationPassword(this.children.input2);
         }
 }  });

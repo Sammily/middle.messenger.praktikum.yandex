@@ -19,19 +19,14 @@ export class Block {
 
     constructor(propsAndChildren = {}) {
         const { children, props } = this._getChildren(propsAndChildren);
-        
         const eventBus = new EventBus();
-        
         this._meta = {
         props
         };
-
         this.children = children;
         this._id = makeUUID();
         this.props = this._makePropsProxy({ ...props, _id: this._id });
-        
         this.eventBus = () => eventBus;
-    
         this._registerEvents(eventBus);
         eventBus.emit(Block.EVENTS.INIT);
     }
@@ -57,7 +52,6 @@ export class Block {
         Object.keys(events).forEach((eventName) => {
             if (eventName === 'blur' || eventName === 'focus' || eventName === 'change') {
                 this._element?.children[1].addEventListener(eventName, events[eventName]);
-                
             } else {
                 this._element?.addEventListener(eventName, events[eventName]);
             }
@@ -79,15 +73,12 @@ export class Block {
   _init() {
       this._createResources();
       this.init();
-      //this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-      // or ???
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
     
     init() {}
   
     _componentDidMount() {
-        //this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
         this.componentDidMount();
     }
 
@@ -180,7 +171,6 @@ export class Block {
 
         const replaceStubToComponent = (component: Block) => {
             const stub = temp.content.querySelector(`[data-id="${component._id}"]`);
-      
             if (!stub) {
               return;
             }

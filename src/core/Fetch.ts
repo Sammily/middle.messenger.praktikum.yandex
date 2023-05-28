@@ -14,7 +14,7 @@ type Options = {
 
 function queryStringify(data: any) {
     let str = '?';
-    for (let key in data) {
+    for (const key in data) {
         str = str + '' + key + '=' + data[key] + '&';
     }
     return str.slice(0, -1);
@@ -23,7 +23,7 @@ function queryStringify(data: any) {
 class HTTPTransport {
     get = (url: string, options: Options = {data: {}, timeout: 5000, method: METHODS.GET}) => {
         options.data = queryStringify(options.data);
-        return this.request(url+options.data, {...options}, options.timeout);
+        return this.request(url+queryStringify(options.data), {...options}, options.timeout);
     };
 
     post = (url: string, options: Options = {data: {}, timeout: 5000, method: METHODS.POST}) => {
