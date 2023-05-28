@@ -12,7 +12,7 @@ type InputProps = {
     events?: {
         blur?: (evt: PointerEvent) => void;
         focus?: (evt: PointerEvent) => void;
-        change?: (evt: PointerEvent) => void;
+        focusout?: (evt: PointerEvent) => void;
     }
 }
 
