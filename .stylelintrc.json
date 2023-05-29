@@ -2,5 +2,12 @@
     "extends": "stylelint-config-standard",
     "ignoreFiles": [
       "dist/*"
-    ]
+    ],
+    "rules": {
+        "selector-class-pattern": null,
+        "at-rule-empty-line-before": null,
+        "at-rule-no-unknown": null,
+        "color-hex-length":["long"],
+        "declaration-empty-line-before": null
+    }
   } 
