@@ -10,9 +10,8 @@ type InputProps = {
     value?: string;
     error?: string;
     events?: {
-        blur?: (evt: PointerEvent) => void;
-        focus?: (evt: PointerEvent) => void;
-        focusout?: (evt: PointerEvent) => void;
+        blur?: () => void;
+        focus?: () => void;
     }
 }
 

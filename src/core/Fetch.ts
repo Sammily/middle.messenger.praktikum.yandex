@@ -12,6 +12,8 @@ type Options = {
     timeout: number;
 };
 
+type HTTPMethod = (url: string, options?: Options) => Promise<unknown>
+
 function queryStringify(data: any) {
     let str = '?';
     for (const key in data) {
@@ -20,21 +22,21 @@ function queryStringify(data: any) {
     return str.slice(0, -1);
 }
 
-class HTTPTransport {
-    get = (url: string, options: Options = {data: {}, timeout: 5000, method: METHODS.GET}) => {
+export class HTTPTransport {
+    get: HTTPMethod = (url, options = {data: {}, timeout: 5000, method: METHODS.GET}) => {
         options.data = queryStringify(options.data);
         return this.request(url+queryStringify(options.data), {...options}, options.timeout);
     };
 
-    post = (url: string, options: Options = {data: {}, timeout: 5000, method: METHODS.POST}) => {
+    post: HTTPMethod = (url, options= {data: {}, timeout: 5000, method: METHODS.POST}) => {
             return this.request(url, {...options}, options.timeout);
     };
 
-    put = (url: string, options: Options = {data: {}, timeout: 5000, method: METHODS.PUT}) => {
+    put: HTTPMethod = (url, options = {data: {}, timeout: 5000, method: METHODS.PUT}) => {
             return this.request(url, {...options}, options.timeout);
     };
 
-    delete = (url: string, options: Options = {data: {}, timeout: 5000, method: METHODS.DELETE}) => { 
+    delete: HTTPMethod = (url, options = {data: {}, timeout: 5000, method: METHODS.DELETE}) => { 
             return this.request(url, {...options}, options.timeout);
     };
 

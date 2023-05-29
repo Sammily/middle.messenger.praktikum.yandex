@@ -50,13 +50,22 @@ export class Block {
             events: Record<string, () => void>;
         };
         Object.keys(events).forEach((eventName) => {
-            if (eventName === 'blur' || eventName === 'focus' || eventName === 'change') {
+            if (eventName === 'blur' || eventName === 'focus') {
                 this._element?.children[1].addEventListener(eventName, events[eventName]);
             } else {
                 this._element?.addEventListener(eventName, events[eventName]);
             }
         });
     }
+
+    _removeEvents() {
+        const { events = {} } = this.props as {
+            events: Record<string, () => void>;
+        };
+        Object.keys(events).forEach((eventName) => {
+                this._element?.removeEventListener(eventName, events[eventName]);
+        });
+    };
     
   _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
@@ -119,6 +128,7 @@ export class Block {
   _render() {
     const block = this.render();
     const newElement = block.firstElementChild as HTMLElement;
+    this._removeEvents();
     this._element!.replaceWith(newElement);
     this._element = newElement;
     this._addEvents();

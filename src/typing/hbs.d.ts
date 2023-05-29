@@ -4,4 +4,5 @@ declare module "*.hbs" {
     declare const template: TemplateDelegate;
   
     export default template;
-  }
+}
+  

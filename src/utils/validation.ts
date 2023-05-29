@@ -14,7 +14,7 @@ export function validationLogin(elem: Block) {
             (elem.element!.children[2] as HTMLLabelElement).textContent = '';
             (elem.element!.children[1] as HTMLInputElement).style.color = "#000000";
         } else {
-            (elem.element!.children[2] as HTMLLabelElement).textContent = 'error';
+            (elem.element!.children[2] as HTMLLabelElement).textContent = 'Можно использовать буквы, цифры, дефис, нижнее подчеркивание, первой должна быть буква';
             (elem.element!.children[1] as HTMLInputElement).style.color = "#FF2F2F";
         }
     }
@@ -28,7 +28,7 @@ export function validationPassword(elem: Block) {
             (elem.element!.children[2] as HTMLLabelElement).textContent = '';
             (elem.element!.children[1] as HTMLInputElement).style.color = "#000000";
         } else {
-            (elem.element!.children[2] as HTMLLabelElement).textContent = 'error';
+            (elem.element!.children[2] as HTMLLabelElement).textContent = 'Минимальная длина 8 символов, обязательно хотя бы одна цифра и заглавная буква';
             (elem.element!.children[1] as HTMLInputElement).style.color = "#FF2F2F";
         }
     }
@@ -42,7 +42,7 @@ export function validationPhone(elem: Block) {
             (elem.element!.children[2] as HTMLLabelElement).textContent = '';
             (elem.element!.children[1] as HTMLInputElement).style.color = "#000000";
         } else {
-            (elem.element!.children[2] as HTMLLabelElement).textContent = 'error';
+            (elem.element!.children[2] as HTMLLabelElement).textContent = 'Необходимо использовать цифры без пробелов или дефиса, может начинаться с плюса';
             (elem.element!.children[1] as HTMLInputElement).style.color = "#FF2F2F";
         }
     }
@@ -56,7 +56,7 @@ export function validationName(elem: Block) {
             (elem.element!.children[2] as HTMLLabelElement).textContent = '';
             (elem.element!.children[1] as HTMLInputElement).style.color = "#000000";
         } else {
-            (elem.element!.children[2] as HTMLLabelElement).textContent = 'error';
+            (elem.element!.children[2] as HTMLLabelElement).textContent = 'Можно использовать только буквы и дефис, первая буква должна быть заглавной';
             (elem.element!.children[1] as HTMLInputElement).style.color = "#FF2F2F";
         }
     }
@@ -70,7 +70,7 @@ export function validationEmail(elem: Block) {
             (elem.element!.children[2] as HTMLLabelElement).textContent = '';
             (elem.element!.children[1] as HTMLInputElement).style.color = "#000000";
         } else {
-            (elem.element!.children[2] as HTMLLabelElement).textContent = 'error';
+            (elem.element!.children[2] as HTMLLabelElement).textContent = 'Введите корректный email адрес';
             (elem.element!.children[1] as HTMLInputElement).style.color = "#FF2F2F";
         }
     }

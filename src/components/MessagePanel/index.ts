@@ -20,7 +20,7 @@ export class MessagePanel extends Block {
             evt.preventDefault();
             const value = (document.getElementById('message') as HTMLInputElement).value;
             if(value === '') {
-              (document.getElementById('error') as HTMLLabelElement).textContent = 'error';
+              (document.getElementById('error') as HTMLLabelElement).textContent = 'Введите сообщение';
             } else {
               (document.getElementById('error') as HTMLLabelElement).textContent = '';
             }
