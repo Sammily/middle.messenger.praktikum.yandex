@@ -17,14 +17,19 @@
 }
 
 .chat__chat {
-  flex-grow: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @mixin text #999999, 1.2rem, 1.2rem;
+    height: 100vh;
+    flex-grow: 3;
 }
 
 .search__form {
   display: flex;
   justify-content: center;
   border-bottom: 0.1rem solid #EAEAEA;
-  margin: 2.3rem 1.0rem 0 1.0rem;
+  margin: 2.3rem 1.0rem 0;
   padding-bottom: 1.4rem;
 }
 
@@ -33,7 +38,7 @@
   width: 29.0rem;
   height: 3.2rem;
   text-align: center;
-  background: #EFEFEF url(../asserts/search-icon.png) no-repeat;
+  background: #EFEFEF url("../assets/search-icon.png") no-repeat;
   background-position: 38% 50%;
   border-radius: 0.5rem;
   border: none;
@@ -89,14 +94,6 @@
   vertical-align: middle;
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
-}
-
-.chat__chat {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @mixin text #999999, 1.2rem, 1.2rem;
-  height: 100vh;
 }
 
 .chat-panel {

@@ -1,0 +1,21 @@
+<section class="chat-panel">
+  <div class="chat-panel__header">
+    {{{image}}}
+    <h5 class="chat-panel__chat-name">Название чата</h5>
+    {{{dotsMenu}}}
+  </div>
+  <div class="chat-panel__messages">
+    <h5 class="chat-panel__time">11:48</h5>
+    <div class="chat-panel_messages-container">
+      Здесь будут сообщения
+    </div>
+  </div>
+  <div class="chat-panel__send-container">
+    <form id="form">
+      {{{clipButton}}}
+      <input type="text" placeholder="Сообщение" class="chat-panel__input" name="message" id="message">
+      <label class="error" id="error">{{error}}</label>
+      {{{arrowButton}}}
+    </form>
+  </div>
+</section>
