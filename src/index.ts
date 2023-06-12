@@ -11,8 +11,11 @@ import { Error500 } from './pages/Page500';
 import { AddDeleteUserPanel } from './components/AddDeleteUserPanel';
 import { Chat } from './pages/Chat';
 import { ChatActive } from './pages/ChatActive';
+import Router from './core/Router';
 
 window.addEventListener('DOMContentLoaded', () => {
+
+    
     const pages = [
         { link: '/profile', label: "profile" },
         { link: '/login', label: 'login' },
@@ -26,29 +29,36 @@ window.addEventListener('DOMContentLoaded', () => {
         { link: '/chat', label: 'chat' },
         { link: '/chatActive', label: 'chatActive' }
     ]
-    const loginPage = new LoginPage({});
-    const profilePage = new Profile({});
+    //const loginPage = new LoginPage({});
+    //const profilePage = new Profile({});
     const modal = new Modal({});
     const editProfile = new EditProfile({});
     const editPassword = new EditPassword({});
-    const registration = new Registration({});
+    //const registration = new Registration({});
     const error400 = new Error400({});
     const error500 = new Error500({});
     const addDeleteUser = new AddDeleteUserPanel({});
-    const chat = new Chat({});
+    //const chat = new Chat({});
     const chatActive = new ChatActive({});
+
+    Router
+        .use('/', LoginPage)
+        .use('/profile', Profile)
+        .use('/registration', Registration)
+        .use('/chat', Chat)
+        .start();
 
     const allPages = new AllPages({pages});
         
     renderDOM(allPages, "#navigation");
 
     switch (window.location.pathname) {
-        case "/profile":
-            renderDOM(profilePage);
-            break;
-        case "/login":
-            renderDOM(loginPage);
-            break;
+        //case "/profile":
+          //  renderDOM(profilePage);
+            //break;
+        //case "/login":
+            //renderDOM(loginPage);
+            //break;
         case "/modal":
             renderDOM(modal);
             break;
@@ -58,9 +68,9 @@ window.addEventListener('DOMContentLoaded', () => {
         case "/edit-password":
             renderDOM(editPassword);
             break;
-        case "/registration":
-            renderDOM(registration);
-            break;
+        //case "/registration":
+            //renderDOM(registration);
+            //break;
         case "/error400":
             renderDOM(error400);
             break;
@@ -70,9 +80,9 @@ window.addEventListener('DOMContentLoaded', () => {
         case "/addDeleteUser":
             renderDOM(addDeleteUser);
             break;
-        case "/chat":
-            renderDOM(chat);
-            break;
+        //case "/chat":
+            //renderDOM(chat);
+            //break;
         case "/chatActive":
             renderDOM(chatActive);
             break;
