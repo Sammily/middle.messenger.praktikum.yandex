@@ -3,6 +3,8 @@ import template from "./authorization.hbs";
 import { Button } from "../../components/Button";
 import { Input } from '../../components/Input';
 import { validationLogin, validationPassword } from "../../utils/validation";
+import AuthController from "../../controllers/AuthController";
+import { SignInDataType } from "api/auth";
 
 export class LoginPage extends Block {
 
@@ -10,7 +12,11 @@ export class LoginPage extends Block {
         super(props);  
     }
 
+    login: FormDataEntryValue | null = null;
+    password: FormDataEntryValue | null = null;
+
     init() {
+        
         this.children.button = new Button({ buttonClass: 'btn', type: 'submit', buttonText: 'Войти', events: 
             { click: (evt: PointerEvent) => {
                 evt.preventDefault();
@@ -18,9 +24,10 @@ export class LoginPage extends Block {
                 validationPassword(this.children.input2);
                 const form = document.getElementById('form') as HTMLFormElement;
                 const formData = new FormData(form);
-                const login = formData.get('login');
-                const password = formData.get('password');
-                console.log('formData: ', login, password);
+                this.login = formData.get('login');
+                this.password = formData.get('password');
+                console.log('formData: ', this.login, this.password);
+                this.onSubmit();
             } 
             }
         });
@@ -43,6 +50,11 @@ export class LoginPage extends Block {
                 validationPassword(this.children.input2);
             }
         }});
+    }
+
+    onSubmit() {
+        const data = { login: this.login, password: this.password };
+        AuthController.signin(data as SignInDataType);
     }
 
     render() {

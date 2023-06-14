@@ -17,16 +17,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
     
     const pages = [
-        { link: '/profile', label: "profile" },
-        { link: '/login', label: 'login' },
+        { link: '/settings', label: "profile" },
+        { link: '/', label: 'login' },
         { link: '/modal', label: 'modal' },
         { link: '/edit-profile', label: 'editProfile' },
         { link: '/edit-password', label: 'editPassword' },
-        { link: '/registration', label: 'registration' },
+        { link: '/sign-up', label: 'registration' },
         { link: '/error400', label: 'error400' },
         { link: '/error500', label: 'error500' },
         { link: '/addDeleteUser', label: 'addDeleteUser' },
-        { link: '/chat', label: 'chat' },
+        { link: '/messenger', label: 'chat' },
         { link: '/chatActive', label: 'chatActive' }
     ]
     //const loginPage = new LoginPage({});
@@ -43,9 +43,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     Router
         .use('/', LoginPage)
-        .use('/profile', Profile)
-        .use('/registration', Registration)
-        .use('/chat', Chat)
+        .use('/settings', Profile)
+        .use('/sign-up', Registration)
+        .use('/messenger', Chat)
         .start();
 
     const allPages = new AllPages({pages});

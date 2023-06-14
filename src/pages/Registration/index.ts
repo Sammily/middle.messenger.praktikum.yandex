@@ -3,12 +3,22 @@ import template from "./registration.hbs";
 import { Button } from "../../components/Button";
 import { Input } from '../../components/Input';
 import { validationEmail, validationLogin, validationName, validationPassword, validationPhone } from "../../utils/validation";
+import { SignUpDataType } from "api/auth";
+import AuthController from "../../controllers/AuthController";
 
 export class Registration extends Block {
 
     constructor(props: object | undefined) {
       super(props);
     }
+
+    login: FormDataEntryValue | null = null;
+    password: FormDataEntryValue | null = null;
+    passwordSecond: FormDataEntryValue | null = null;
+    email: FormDataEntryValue | null = null;
+    firstName: FormDataEntryValue | null = null;
+    secondName: FormDataEntryValue | null = null;
+    phone: FormDataEntryValue | null = null;
    
     init() {
         this.children.button = new Button({ buttonClass: 'btn', type: 'submit', buttonText: 'Зарегистрироваться', events: 
@@ -23,14 +33,15 @@ export class Registration extends Block {
             validationName(this.children.input4);
             const form = document.getElementById('form') as HTMLFormElement;
             const formData = new FormData(form);
-            const login = formData.get('login');
-            const password = formData.get('password');
-            const passwordSecond = formData.get('password-second');
-            const email = formData.get('email');
-            const firstName = formData.get('first_name');
-            const secondName = formData.get('second_name');
-            const phone = formData.get('phone');
-            console.log('formData: ', login, password, passwordSecond, email, firstName, secondName, phone);
+            this.login = formData.get('login');
+            this.password = formData.get('password');
+            this.passwordSecond = formData.get('password-second');
+            this.email = formData.get('email');
+            this.firstName = formData.get('first_name');
+            this.secondName = formData.get('second_name');
+            this.phone = formData.get('phone');
+            console.log('formData: ', this.login, this.password, this.passwordSecond, this.email, this.firstName, this.secondName, this.phone);
+            this.onSubmit();
         } 
         } });
         this.children.input = new Input({ forAndName: 'email', labelClass: 'label', labelText: 'Почта', inputType: 'email', inputClass: 'input', events:
@@ -69,7 +80,7 @@ export class Registration extends Block {
             validationName(this.children.input4);
         }
 } });    
-        this.children.input5 = new Input({ forAndName: 'phone', labelClass: 'label', labelText: 'Логин', inputType: 'phone', inputClass: 'input', events:
+        this.children.input5 = new Input({ forAndName: 'phone', labelClass: 'label', labelText: 'Телефон', inputType: 'phone', inputClass: 'input', events:
         {
         focus: () => {
             validationPhone(this.children.input5);
@@ -96,6 +107,19 @@ export class Registration extends Block {
             validationPassword(this.children.input7);
         }
 }});
+    }
+
+    onSubmit() {
+        const data:SignUpDataType = {
+            first_name: this.firstName as string,
+            second_name: this.secondName as string,
+            login: this.login as string,
+            email: this.email as string,
+            password: this.password as string,
+            phone: this.phone as string
+        };
+        //console.log(data);
+        AuthController.signup(data as SignUpDataType);
     }
 
     render() {
