@@ -4,6 +4,8 @@ import { Input } from '../../components/Input';
 import { SideButton } from "../../components/sideButton";
 import profilePhoto from "../../assets/ProfileImg.png"
 import { Image } from "../../components/Image";
+import AuthController from "../../controllers/AuthController";
+import { Link } from '../../components/Link';
 
 export class Profile extends Block {
 
@@ -20,6 +22,18 @@ export class Profile extends Block {
         this.children.input6 = new Input({ forAndName: 'phone', labelClass: 'profile__label', labelText: 'Логин', inputType: 'phone', inputClass: 'profile__input-disabled', value: '+79001234567'});
         this.children.sideButton = new SideButton({ buttonClass: 'side-btn' });
         this.children.image = new Image({ src: profilePhoto, alt: "Default profile photo", class: "image" });
+
+
+        this.children.logout = new Link({ linkClass: 'red-link', linkText: 'Выйти', events: 
+        { click: () => {
+            this.clickLogoutBtn();
+        } 
+        }
+    });
+    }
+
+    clickLogoutBtn() {
+        AuthController.logout();
     }
 
     render() {

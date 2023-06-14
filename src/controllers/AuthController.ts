@@ -12,7 +12,6 @@ export class AuthController {
   async signin(data: SignInDataType) {
       try {
       await this.api.signin(data);
-
       Router.go('/settings');
     } catch (e: any) {
       console.error(e);
@@ -23,11 +22,23 @@ export class AuthController {
     try {
       await this.api.signup(data);
 
-      Router.go('/settings');
+      Router.go('/messenger');
     } catch (e: any) {
       console.error(e.message);
     }
   }
+
+  async logout() {
+    console.log('logout');
+    try {
+      await this.api.logout();
+
+      Router.go('/');
+    } catch (e: any) {
+      console.error(e.message);
+    }
+  }
+
 }
 
 export default new AuthController();
