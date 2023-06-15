@@ -1,5 +1,4 @@
 import API, { AuthAPI, SignInDataType, SignUpDataType } from '../api/auth';
-import { Store } from '../core/Store';
 import Router from '../core/Router';
 
 export class AuthController {
@@ -38,7 +37,6 @@ export class AuthController {
       console.error(e.message);
     }
   }
-
 }
 
 export default new AuthController();
