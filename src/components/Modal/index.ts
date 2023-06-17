@@ -21,16 +21,9 @@ export class Modal extends Block {
                     this.avatar = formData.get('avatar');
                     console.log('formData: ', formData);
                     ProfileController.changeAvatar(new FormData(form));
-                    //this.onSubmit();
                 }
             }
         });
-    }
-
-    onSubmit() {
-        const data = { avatar: this.avatar };
-        console.log(FormData);
-        ProfileController.changeAvatar(FormData);
     }
 
     render() {

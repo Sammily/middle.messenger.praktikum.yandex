@@ -56,8 +56,7 @@ export class EditProfile extends Block {
         });
         
         const user = store.getState().user;
-        console.log(user);
-
+        
         this.children.input = new Input({
             forAndName: 'email', labelClass: 'profile__label', labelText: 'Почта',
             inputType: 'email', inputClass: 'profile__input',

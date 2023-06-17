@@ -46,6 +46,7 @@
 
 .sidebar-user-chat {
   display: flex;
+  flex-direction: column;
   border-bottom: 0.1rem solid #EAEAEA;
 }
 
@@ -162,4 +163,18 @@
 
 .chat-panel__arrow-button {
   margin-left: auto;
+}
+
+.addChat {
+  background-color: var(--main-blue);
+  width: 2rem;
+  height: 1.2rem;
+  border-radius: 1.5rem;
+  @mixin text #FFFFFF, 1.1rem, 1.2rem;
+  text-align: center;
+  margin: 1.0rem;
+}
+
+.sidebar-user-chat__chats-container {
+  display: flex;
 }
