@@ -6,30 +6,84 @@ import profilePhoto from "../../assets/ProfileImg.png"
 import { Image } from "../../components/Image";
 import AuthController from "../../controllers/AuthController";
 import { Link } from '../../components/Link';
+import { withRouter } from "../../hocs/withRouter";
+import store, { StoreEvents } from "../../core/Store";
+import Router from "../../core/Router";
 
-export class Profile extends Block {
+
+class Profile extends Block {
 
     constructor(props: object | undefined) {
         super(props);  
+
+        store.on(StoreEvents.Updated, () => {
+            this.setProps(store.getState());
+        });
+        
     }
 
     init() {
-        this.children.input = new Input({ forAndName: 'email', labelClass: 'profile__label', labelText: 'Почта', inputType: 'email', inputClass: 'profile__input-disabled', value: 'pochta@yandex.ru' });
-        this.children.input2 = new Input({ forAndName: 'login', labelClass: 'profile__label', labelText: 'Логин', inputType: 'text', inputClass: 'profile__input-disabled', value: 'IvanIvanov' });
-        this.children.input3 = new Input({ forAndName: 'first_name', labelClass: 'profile__label', labelText: 'Имя', inputType: 'text', inputClass: 'profile__input-disabled', value: 'Иван' });
-        this.children.input4 = new Input({ forAndName: 'second_name', labelClass: 'profile__label', labelText: 'Фамилия', inputType: 'text', inputClass: 'profile__input-disabled', value: 'Иванов' });
-        this.children.input5 = new Input({ forAndName: 'display_name', labelClass: 'profile__label', labelText: 'Имя в чате', inputType: 'text', inputClass: 'profile__input-disabled', value: 'Иван' });
-        this.children.input6 = new Input({ forAndName: 'phone', labelClass: 'profile__label', labelText: 'Логин', inputType: 'phone', inputClass: 'profile__input-disabled', value: '+79001234567'});
+        const user = store.getState().user;
+        console.log(user);
+        this.children.input = new Input({
+            forAndName: 'email', labelClass: 'profile__label',
+            labelText: 'Почта', inputType: 'email', inputClass: 'profile__input-disabled',
+            value: (user ? user.email : 'pochta@yandex.ru')
+        });
+        this.children.input2 = new Input({
+            forAndName: 'login', labelClass: 'profile__label',
+            labelText: 'Логин', inputType: 'text', inputClass: 'profile__input-disabled',
+            value: (user ? user.login : 'IvanIvanov')
+        });
+        this.children.input3 = new Input({
+            forAndName: 'first_name', labelClass: 'profile__label',
+            labelText: 'Имя', inputType: 'text', inputClass: 'profile__input-disabled',
+            value: (user ? user.first_name : 'Иван')
+        });
+        this.children.input4 = new Input({
+            forAndName: 'second_name', labelClass: 'profile__label',
+            labelText: 'Фамилия', inputType: 'text', inputClass: 'profile__input-disabled',
+            value: (user ? user.second_name : 'Иванов')
+        });
+        this.children.input5 = new Input({
+            forAndName: 'display_name', labelClass: 'profile__label',
+            labelText: 'Имя в чате', inputType: 'text', inputClass: 'profile__input-disabled',
+            value: (user ? user.display_name : 'Иван')
+        });
+        this.children.input6 = new Input({
+            forAndName: 'phone', labelClass: 'profile__label',
+            labelText: 'Логин', inputType: 'phone', inputClass: 'profile__input-disabled',
+            value: (user ? user.phone : '+79001234567')
+        });
         this.children.sideButton = new SideButton({ buttonClass: 'side-btn' });
         this.children.image = new Image({ src: profilePhoto, alt: "Default profile photo", class: "image" });
 
+        this.children.logout = new Link({
+            linkClass: 'red-link', linkText: 'Выйти',
+            events: {
+                click: () => {
+                    this.clickLogoutBtn();
+                } 
+            }
+        });
 
-        this.children.logout = new Link({ linkClass: 'red-link', linkText: 'Выйти', events: 
-        { click: () => {
-            this.clickLogoutBtn();
-        } 
-        }
-    });
+        this.children.editProfile = new Link({
+            linkClass: 'profile__link', linkText: 'Изменить данные',
+            events: {
+                click: () => {
+                    Router.go('/edit-profile')
+                } 
+            }
+        });
+
+        this.children.editPassword = new Link({
+            linkClass: 'profile__link', linkText: 'Изменить пароль',
+            events: {
+                click: () => {
+                    Router.go('/edit-password')
+                } 
+            }
+        });
     }
 
     clickLogoutBtn() {
@@ -40,3 +94,6 @@ export class Profile extends Block {
         return this.compile(template, {...this.props});
       }
 }
+
+export default withRouter(Profile);
+

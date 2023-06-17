@@ -5,11 +5,17 @@ import { Input } from '../../components/Input';
 import { validationLogin, validationPassword } from "../../utils/validation";
 import AuthController from "../../controllers/AuthController";
 import { SignInDataType } from "api/auth";
+import { withRouter } from "../../hocs/withRouter";
+import store, { StoreEvents } from "../../core/Store";
 
-export class LoginPage extends Block {
+class LoginPage extends Block {
 
     constructor(props: object | undefined) {
         super(props);  
+
+        store.on(StoreEvents.Updated, () => {
+            this.setProps(store.getState());
+              });
     }
 
     login: FormDataEntryValue | null = null;
@@ -61,3 +67,5 @@ export class LoginPage extends Block {
         return this.compile(template, this.props);
       }
 }
+
+export default withRouter(LoginPage);

@@ -28,7 +28,7 @@ class Route {
 
     leave() {
         if (this._block) {
-            this._block.hide();
+            this._block?.destroy();
         }
     }
 
@@ -41,7 +41,9 @@ class Route {
             this._block = new this._blockClass({});
             renderDOM(this._block);
         } else {
-            this._block.show();
+            //console.log(this._block)
+            //this._block.show();
+            renderDOM(this._block);
         }
       }
 }
@@ -83,8 +85,9 @@ class Router {
 
     _onRoute(pathname: string) {
         const route = this.getRoute(pathname);
+        //console.log(pathname, route)
         if (!route) {
-          return 0;
+          return;
         }
         if (this._currentRoute) {
             this._currentRoute.leave();
@@ -95,7 +98,7 @@ class Router {
 
     }
 
-      go(pathname: string) {
+    go(pathname: string) {
         this.history.pushState({}, '', pathname);
         this._onRoute(pathname);
   }

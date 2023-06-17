@@ -3,10 +3,11 @@ import { v4 as makeUUID } from 'uuid';
 
 export class Block {
     static EVENTS = {
-      INIT: "init",
-      FLOW_CDM: "flow:component-did-mount",
-      FLOW_RENDER: "flow:render",
-      FLOW_CDU: "flow:component-did-update",
+        INIT: "init",
+        FLOW_CDM: "flow:component-did-mount",
+        FLOW_RENDER: "flow:render",
+        FLOW_CDU: "flow:component-did-update",
+        FLOW_CWU: 'flow:component-will-unmount',
     };
   
     _element: null | HTMLElement = null;
@@ -67,11 +68,23 @@ export class Block {
         });
     };
     
+    _checkInDom() {
+        const elementInDOM = document.body.contains(this._element);
+    
+        if (elementInDOM) {
+          setTimeout(() => this._checkInDom(), 1000);
+          return;
+        }
+    
+        this.eventBus().emit(Block.EVENTS.FLOW_CWU, this.props);
+      }
+
   _registerEvents(eventBus: EventBus) {
-    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+        eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
   }
   
   _createResources() {
@@ -88,6 +101,7 @@ export class Block {
     init() {}
   
     _componentDidMount() {
+        this._checkInDom();
         this.componentDidMount();
     }
 
@@ -102,6 +116,13 @@ export class Block {
     );
   }
   
+  _componentWillUnmount() {
+    this.eventBus().destroy();
+    this.componentWillUnmount();
+  }
+
+  public componentWillUnmount() {}
+    
   _componentDidUpdate(oldProps: object, newProps: object) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if(response) {
@@ -210,4 +231,8 @@ export class Block {
     hide() {
       this.getContent().style.display = "none";
     }
+
+    public destroy() {
+        this._element!.remove();
+      }
   }

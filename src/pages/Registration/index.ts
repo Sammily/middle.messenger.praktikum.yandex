@@ -52,7 +52,8 @@ export class Registration extends Block {
         blur: () => {
             validationEmail(this.children.input);
         }
-} });
+        }
+        });
         this.children.input2 = new Input({ forAndName: 'login', labelClass: 'label', labelText: 'Логин', inputType: 'text', inputClass: 'input', events:
         {
         focus: () => {

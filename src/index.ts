@@ -1,10 +1,10 @@
-import {LoginPage} from './pages/LoginPage';
-import { Profile } from './pages/Profile';
+import LoginPage from './pages/LoginPage';
+import Profile from './pages/Profile';
 import renderDOM from './core/renderDOM';
 import { AllPages } from './components/nav';
 import { Modal } from './components/Modal';
 import { EditProfile } from './pages/EditProfile';
-import { EditPassword } from './pages/EditPassword';
+import EditPassword from './pages/EditPassword';
 import { Registration } from './pages/Registration';
 import { Error400 } from './pages/Page400';
 import { Error500 } from './pages/Page500';
@@ -12,10 +12,9 @@ import { AddDeleteUserPanel } from './components/AddDeleteUserPanel';
 import { Chat } from './pages/Chat';
 import { ChatActive } from './pages/ChatActive';
 import Router from './core/Router';
+import AuthController from './controllers/AuthController';
 
-window.addEventListener('DOMContentLoaded', () => {
-
-    
+window.addEventListener('DOMContentLoaded', async() => {
     const pages = [
         { link: '/settings', label: "profile" },
         { link: '/', label: 'login' },
@@ -29,36 +28,27 @@ window.addEventListener('DOMContentLoaded', () => {
         { link: '/messenger', label: 'chat' },
         { link: '/chatActive', label: 'chatActive' }
     ]
-    //const loginPage = new LoginPage({});
-    //const profilePage = new Profile({});
     const modal = new Modal({});
     const editProfile = new EditProfile({});
     const editPassword = new EditPassword({});
-    //const registration = new Registration({});
     const error400 = new Error400({});
     const error500 = new Error500({});
     const addDeleteUser = new AddDeleteUserPanel({});
-    //const chat = new Chat({});
     const chatActive = new ChatActive({});
 
     Router
         .use('/', LoginPage)
         .use('/settings', Profile)
+        .use('/edit-profile', EditProfile)
+        .use('/edit-password', EditPassword)
         .use('/sign-up', Registration)
-        .use('/messenger', Chat)
-        .start();
+        .use('/messenger', Chat);
 
     const allPages = new AllPages({pages});
         
     renderDOM(allPages, "#navigation");
 
     switch (window.location.pathname) {
-        //case "/profile":
-          //  renderDOM(profilePage);
-            //break;
-        //case "/login":
-            //renderDOM(loginPage);
-            //break;
         case "/modal":
             renderDOM(modal);
             break;
@@ -68,9 +58,6 @@ window.addEventListener('DOMContentLoaded', () => {
         case "/edit-password":
             renderDOM(editPassword);
             break;
-        //case "/registration":
-            //renderDOM(registration);
-            //break;
         case "/error400":
             renderDOM(error400);
             break;
@@ -80,12 +67,34 @@ window.addEventListener('DOMContentLoaded', () => {
         case "/addDeleteUser":
             renderDOM(addDeleteUser);
             break;
-        //case "/chat":
-            //renderDOM(chat);
-            //break;
         case "/chatActive":
             renderDOM(chatActive);
             break;
-        
     }
+
+    let isProtectedRoute = true;
+
+  switch (window.location.pathname) {
+    case '/':
+    case '/sign-up':
+      isProtectedRoute = false;
+      break;
+  }
+
+  try {
+    await AuthController.fetchUser();
+
+    Router.start();
+
+    if (!isProtectedRoute) {
+      Router.go('/settings')
+    }
+  } catch (e) {
+      console.log(e);
+    Router.start();
+
+    if (isProtectedRoute) {
+      Router.go('/');
+    }
+  }
 });

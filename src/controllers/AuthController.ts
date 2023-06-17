@@ -1,5 +1,7 @@
+import store from '../core/Store';
 import API, { AuthAPI, SignInDataType, SignUpDataType } from '../api/auth';
 import Router from '../core/Router';
+
 
 export class AuthController {
   private readonly api: AuthAPI;
@@ -7,11 +9,15 @@ export class AuthController {
   constructor() {
     this.api = API;
   }
-
+   
   async signin(data: SignInDataType) {
       try {
-      await this.api.signin(data);
-      Router.go('/settings');
+        await this.api.signin(data);
+          const user = await this.api.read();
+          console.log(user);
+        store.set('user', user );
+        //console.log(window.store);
+        Router.go('/settings');
     } catch (e: any) {
       console.error(e);
     }
@@ -30,12 +36,17 @@ export class AuthController {
   async logout() {
     console.log('logout');
     try {
-      await this.api.logout();
-
-      Router.go('/');
+        await this.api.logout();
+        store.set('user', null);
+        Router.go('/');
     } catch (e: any) {
-      console.error(e.message);
+      //console.error(e.message);
     }
+  }
+
+  async fetchUser() {
+    const user = await this.api.read();
+    store.set('user', user);
   }
 }
 

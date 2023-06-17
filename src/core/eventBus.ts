@@ -25,7 +25,7 @@ M extends { [K in E]: unknown[] } = Record<E, any[]>,
     }
   
     emit(event: E, ...args: M[E]) {
-      if (!this.listeners[event]) {
+        if (!this.listeners[event]) {
         throw new Event(`Нет события: ${event}`);
       }
       
@@ -33,5 +33,9 @@ M extends { [K in E]: unknown[] } = Record<E, any[]>,
         listener(...args);
       });
     }
+
+    destroy() {
+        this.listeners = {};
+      }
 }
   

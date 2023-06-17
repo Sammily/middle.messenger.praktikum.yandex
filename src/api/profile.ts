@@ -16,12 +16,21 @@ export type UserType =  {
   avatar: string;
 }
 
+export type ChangeUserType = {
+    first_name: string;
+    second_name: string;
+    display_name: string;
+    login: string;
+    email: string;
+    phone: string;
+}
+
 export class ProfileAPI extends BaseAPI {
     constructor() {
         super('/user');
     }
 
-    changeUser(data: UserType) {
+    changeUser(data: ChangeUserType) {
       return this.http.put('/profile', { data: data, method: 'put', timeout: 5000 });
     }
     
@@ -33,7 +42,10 @@ export class ProfileAPI extends BaseAPI {
         return this.http.put('/profile/avatar', { data: data, method: 'put', timeout: 5000 });
     }
 
-    read = undefined;
+    read(id: string) {
+        return this.http.get(`/user/{${id}}`,{ method: 'get', timeout: 5000 });
+    }
+    
     create = undefined;
     update = undefined;
     delete = undefined;
