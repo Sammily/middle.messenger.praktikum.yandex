@@ -13,8 +13,9 @@ export class ProfileController {
       try {
           await this.api.changeUser(data);
           console.log('changeUser');
-          store.set('user', data );
-      Router.go('/settings');
+          store.set('user', data);
+          console.log(store);
+      //Router.go('/settings');
     } catch (e: any) {
       console.error(e);
     }
@@ -29,16 +30,18 @@ export class ProfileController {
         try {
             await this.api.changePassword(data);
             console.log('changePassword');
-        Router.go('/settings');
+            //Router.go('/settings');
       } catch (e: any) {
         console.error(e);
       }
     }
 
     async changeAvatar(data: any) {
+        console.log(data);
         try {
+            console.log(data);
             await this.api.changeAvatar(data);
-            console.log('changeAvatar');
+            console.log(data);
         //Router.go('/settings');
       } catch (e: any) {
         console.error(e);

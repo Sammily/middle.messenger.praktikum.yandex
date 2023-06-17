@@ -10,6 +10,7 @@ import { withRouter } from "../../hocs/withRouter";
 import store, { StoreEvents } from "../../core/Store";
 import ProfileController from "../../controllers/ProfileController";
 import { ChangeUserType } from "api/profile";
+import { Modal } from "../../components/Modal";
 
 export class EditProfile extends Block {
 
@@ -134,7 +135,17 @@ export class EditProfile extends Block {
                 }
             }});
         this.children.sideButton = new SideButton({ buttonClass: 'side-btn' });
-        this.children.image = new Image({ src: profilePhoto, alt: "Default profile photo", class: "image" });
+        this.children.modal = new Modal({});
+        this.children.image = new Image({
+            src: (user ? 'https://ya-praktikum.tech/api/v2/resources' + user.avatar : profilePhoto),
+            alt: "Profile photo",
+            class: "avatar",
+            events: {
+                click: () => {
+                    const modal = document.querySelector('.modal') as HTMLElement;
+                    modal.style.visibility = 'visible';
+            }
+        } });
     }
 
     onSubmit() {

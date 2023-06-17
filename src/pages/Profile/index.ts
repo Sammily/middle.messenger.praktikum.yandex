@@ -56,7 +56,11 @@ class Profile extends Block {
             value: (user ? user.phone : '+79001234567')
         });
         this.children.sideButton = new SideButton({ buttonClass: 'side-btn' });
-        this.children.image = new Image({ src: profilePhoto, alt: "Default profile photo", class: "image" });
+        this.children.image = new Image({
+            src: (user ? 'https://ya-praktikum.tech/api/v2/resources' + user.avatar : profilePhoto),
+            alt: "Profile photo",
+            class: "avatar"
+        });
 
         this.children.logout = new Link({
             linkClass: 'red-link', linkText: 'Выйти',

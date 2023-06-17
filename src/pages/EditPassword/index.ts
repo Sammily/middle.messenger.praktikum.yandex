@@ -68,7 +68,11 @@ class EditPassword extends Block {
         }
 }  });
         this.children.sideButton = new SideButton({ buttonClass: 'side-btn' });
-        this.children.image = new Image({ src: profilePhoto, alt: "Default profile photo", class: "image" });
+        this.children.image = new Image({
+            src: (store.getState().user ? 'https://ya-praktikum.tech/api/v2/resources' + store.getState().user.avatar : profilePhoto),
+            alt: "Profile photo",
+            class: "avatar"
+        });
     }
 
     onSubmit() {
