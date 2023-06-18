@@ -5,6 +5,7 @@ import userImg from "../../assets/usersImg.png";
 import dotsMenu from "../../assets/dotsButton.png";
 import clipButton from "../../assets/clipButton.png";
 import arrowButton from "../../assets/arrowButton.png";
+import ChatsController from '../../controllers/ChatsController';
 
 export class MessagePanel extends Block {
   constructor(props: object | undefined) {
@@ -28,6 +29,8 @@ export class MessagePanel extends Block {
             const formData = new FormData(form);
             const message = formData.get('message');
             console.log('formData: ', message);
+            console.log('send message - ',message, 'to chat id = 13063');
+            ChatsController.sendMessage(13063, message as string);
         } 
         }   });
     }

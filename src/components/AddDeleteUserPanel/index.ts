@@ -10,12 +10,11 @@ export class AddDeleteUserPanel extends Block {
   }
 
     init() {
-
       const testUser = {
         users: [1046574],
         chatId: 13063
-
       };
+
         this.children.image = new Image({ src: buttonImg, alt: "add icon", events: {
           'click': () => {
             ChatsController.addUserFromChat(testUser);

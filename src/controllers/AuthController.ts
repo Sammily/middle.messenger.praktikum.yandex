@@ -1,6 +1,7 @@
 import store from '../core/Store';
 import API, { AuthAPI, SignInDataType, SignUpDataType } from '../api/auth';
 import Router from '../core/Router';
+import ChatsController from './ChatsController';
 
 
 export class AuthController {
@@ -36,6 +37,7 @@ export class AuthController {
   async logout() {
     console.log('logout');
     try {
+      ChatsController.closeAll();
         await this.api.logout();
         store.set('user', null);
         Router.go('/');

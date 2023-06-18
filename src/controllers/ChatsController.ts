@@ -1,7 +1,16 @@
 import store from '../core/Store';
 import API, { ChatAPI, CreateChatType, DeleteOrAddUserFromChat } from '../api/chat';
+import WS from '../core/WebSocket';
 //import Router from '../core/Router';
 
+type ChatsType = {
+    avatar: string | null;
+    created_by: number;
+    id: number;
+    last_message: string | null;
+    title: string;
+    unread_count: number;
+}
 
 export class ChatsController {
   private readonly api: ChatAPI;
@@ -9,14 +18,23 @@ export class ChatsController {
   constructor() {
     this.api = API;
   }
-   
+  
+  getToken(id: number) {
+    return this.api.getToken(id);
+  }
+
   async getChats() {
       try {
-        const chats = await this.api.read();
+        const chats = await this.api.read() as ChatsType[];
         store.set('chats', chats);
         console.log(store)
+        chats.map(async (chat) => {
+            const token = await this.getToken(chat.id);
+            console.log('get token', token);
+            await this.connect(chat.id, token);
+        });
     } catch (e: any) {
-      console.error(e);
+        console.error(e);
     }
   }
 
@@ -45,6 +63,62 @@ export class ChatsController {
       console.error(e.message);
     }
   }
+
+  //websocket
+  private sockets = new Map();
+
+  async connect(id: number, token: string) {
+    if (this.sockets.has(id)) {
+      return;
+    }
+
+    const userId = store.getState().user.id;
+    const ws = new WS(`wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`);
+    this.sockets.set(id,ws);
+    await ws.connect();
+
+    this.subscribe(ws, id);
+  }
+
+  subscribe(ws: WS, id: number) {
+    ws.on('message', (message) => this.onMessage(id, message));
+    ws.on('close', () => this.onClose(id));
+  }
+
+  onMessage(id: number, messages: any) {
+    let newMessages = [];
+
+    if (Array.isArray(messages)) {
+        newMessages = messages.reverse();
+    } else {
+        newMessages.push(messages);
+    }
+
+    const currentMessages = (store.getState().messages || {})[id] || [];
+    newMessages = [...currentMessages, ...newMessages];
+    store.set(`messages.${id}`, newMessages);
+  }
+
+    sendMessage(id: number, message: string) {
+        const socket = this.sockets.get(id);
+
+        if (!socket) {
+            throw new Error('Socket error');
+        }
+
+        socket.send({
+            type: 'message',
+            content: message,
+        });
+    }
+
+    onClose(id: number) {
+        this.sockets.delete(id);
+    }
+
+    closeAll() {
+        Array.from(this.sockets.values()).forEach(socket => socket.close());
+    }
 
 }
 
