@@ -11,6 +11,7 @@ import store, { StoreEvents } from "../../core/Store";
 import ProfileController from "../../controllers/ProfileController";
 import { ChangeUserType } from "api/profile";
 import { Modal } from "../../components/Modal";
+import Router from '../../core/Router';
 
 export class EditProfile extends Block {
 
@@ -133,7 +134,11 @@ export class EditProfile extends Block {
                     validationPhone(this.children.input6);
                 }
             }});
-        this.children.sideButton = new SideButton({ buttonClass: 'side-btn' });
+        this.children.sideButton = new SideButton({ buttonClass: 'side-btn', events: {
+            'click': () => {
+              Router.go('/messenger');
+            }
+          } });
         this.children.modal = new Modal({});
         this.children.image = new Image({
             src: (user ? 'https://ya-praktikum.tech/api/v2/resources' + user.avatar : profilePhoto),

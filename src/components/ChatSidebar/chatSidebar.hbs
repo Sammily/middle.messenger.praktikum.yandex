@@ -1,10 +1,14 @@
 <section class="sidebar-user-chat">
   {{#each chats}}
-  <img src={{this.avatar}} alt='chat avatar' class='sidebar-user-chat__user-photo' />
   <div class="sidebar-user-chat__chats-container">
+    <img src={{this.avatar}} alt='chat avatar' class='sidebar-user-chat__user-photo' />
     <div class="sidebar-user-chat__preview">
       <p class="sidebar-user-chat__chat-name">{{this.title}}</p>
+      {{#if this.last_message.content}}
+      <p class="sidebar-user-chat__chat-text-preview">{{this.last_message.content}}</p>
+      {{else}}
       <p class="sidebar-user-chat__chat-text-preview">Превью текста чата</p>
+      {{/if}}
     </div>
     <div class="sidebar-user-chat__details">
       <span class="time">11:48</span>

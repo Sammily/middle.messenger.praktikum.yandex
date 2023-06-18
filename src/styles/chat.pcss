@@ -133,7 +133,7 @@
 }
 
 .chat-panel_messages-container {
-  height: 75vh;
+  height: 65vh;
   @mixin text #999999, 1.2rem, 1.2rem;
   align-items: center;
   justify-content: center;
@@ -157,8 +157,8 @@
   background-color: #EFEFEF;
   border-radius: 2.0rem;
   border: none;
-
   height: 3.2rem;
+  width: 50.0rem;
 }
 
 .chat-panel__arrow-button {
@@ -167,14 +167,26 @@
 
 .addChat {
   background-color: var(--main-blue);
-  width: 2rem;
-  height: 1.2rem;
+  width: 5rem;
+  height: 2rem;
   border-radius: 1.5rem;
-  @mixin text #FFFFFF, 1.1rem, 1.2rem;
+  @mixin text #FFFFFF, 0.9rem, 1.0rem;
   text-align: center;
-  margin: 1.0rem;
+  margin-left: 1.0rem;
+}
+
+.addChat:hover {
+  cursor: pointer;
 }
 
 .sidebar-user-chat__chats-container {
   display: flex;
+  border-bottom: 0.1rem solid #eaeaea;
+  padding: 1.2rem 1.0rem;
+}
+
+.links-panel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }

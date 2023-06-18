@@ -4,6 +4,7 @@ import { ChatSidebar } from '../../components/ChatSidebar';
 import { Block } from '../../core/Block';
 import template from './sidebar.hbs';
 import store, { StoreEvents } from '../../core/Store';
+import Router from '../../core/Router';
 
 
 export class Sidebar extends Block {
@@ -20,7 +21,7 @@ export class Sidebar extends Block {
         this.children.chatSidebar = new ChatSidebar({chats});
         this.children.chatModal = new ChatModal({});
         this.children.addChat = new Link({
-            linkClass: 'addChat', linkText: '+',
+            linkClass: 'addChat', linkText: 'Создать чат',
             events: {
                 click: () => {
                     const modal = document.querySelector('.modal') as HTMLElement;
@@ -28,6 +29,14 @@ export class Sidebar extends Block {
                 } 
             }
         });
+        this.children.profileLink = new Link({
+          linkClass: 'chat__link', linkText: 'Профиль >',
+          events: {
+              click: () => {
+                  Router.go('/settings');
+              } 
+          }
+      });
     }
 
     render() {

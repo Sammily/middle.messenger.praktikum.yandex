@@ -55,7 +55,11 @@ class Profile extends Block {
             labelText: 'Логин', inputType: 'phone', inputClass: 'profile__input-disabled',
             value: (user ? user.phone : '+79001234567')
         });
-        this.children.sideButton = new SideButton({ buttonClass: 'side-btn' });
+        this.children.sideButton = new SideButton({ buttonClass: 'side-btn', events: {
+            'click': () => {
+              Router.go('/messenger');
+            }
+          } });
         this.children.image = new Image({
             src: (user ? 'https://ya-praktikum.tech/api/v2/resources' + user.avatar : profilePhoto),
             alt: "Profile photo",

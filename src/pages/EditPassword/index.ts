@@ -10,6 +10,7 @@ import { withRouter } from "../../hocs/withRouter";
 import store, { StoreEvents } from "../../core/Store";
 import ProfileController from "../../controllers/ProfileController";
 import { PasswordDataType } from "api/profile";
+import Router from '../../core/Router';
 
 class EditPassword extends Block {
 
@@ -67,7 +68,11 @@ class EditPassword extends Block {
             validationPassword(this.children.input2);
         }
 }  });
-        this.children.sideButton = new SideButton({ buttonClass: 'side-btn' });
+        this.children.sideButton = new SideButton({ buttonClass: 'side-btn', events: {
+            'click': () => {
+              Router.go('/messenger');
+            }
+          } });
         this.children.image = new Image({
             src: (store.getState().user ? 'https://ya-praktikum.tech/api/v2/resources' + store.getState().user.avatar : profilePhoto),
             alt: "Profile photo",

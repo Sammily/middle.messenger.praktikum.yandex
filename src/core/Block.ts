@@ -66,7 +66,7 @@ export class Block {
         Object.keys(events).forEach((eventName) => {
                 this._element?.removeEventListener(eventName, events[eventName]);
         });
-    };
+    }
     
     _checkInDom() {
         const elementInDOM = document.body.contains(this._element);

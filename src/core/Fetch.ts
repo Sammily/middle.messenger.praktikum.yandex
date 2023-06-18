@@ -70,28 +70,22 @@ export class HTTPTransport {
             };
 
             xhr.timeout = timeout;
-
             xhr.withCredentials = true;
             xhr.responseType = 'json';
             
             xhr.setRequestHeader("Content-Type", 'application/json');
-            
 
             xhr.onabort = reject;
             xhr.onerror = reject;
 			xhr.ontimeout = reject;
             
             if (method === METHODS.GET || !data) {
-                console.log('xhr.send()');
                 xhr.send();
             } else if (data instanceof FormData) {
                 xhr.setRequestHeader('Accept', 'application/json');
-                console.log('xhr.send(data)');
                 xhr.send(data);
             }
             else {
-                console.log('xhr.send(json-data)');
-
                 xhr.send(JSON.stringify(data));
             }
         });

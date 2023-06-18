@@ -22,6 +22,8 @@ export class ChatModal extends Block {
                     const formData = new FormData(form);
                     this.chatName = formData.get('chatName');
                     this.onSubmit();
+                    const modal = document.querySelector('.modal') as HTMLElement;
+                    modal.style.visibility = 'hidden';
                 }
             }
         });
@@ -29,7 +31,6 @@ export class ChatModal extends Block {
 
     onSubmit() {
         const data = {title: this.chatName}
-        console.log(this.chatName);
         ChatsController.createChat(data as CreateChatType);
     }
 
