@@ -74,7 +74,7 @@ class EditPassword extends Block {
             }
           } });
         this.children.image = new Image({
-            src: (store.getState().user ? 'https://ya-praktikum.tech/api/v2/resources' + store.getState().user.avatar : profilePhoto),
+            src: (store.getState().user.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + store.getState().user.avatar : profilePhoto),
             alt: "Profile photo",
             class: "avatar"
         });
@@ -83,7 +83,6 @@ class EditPassword extends Block {
     onSubmit() {
         const data = { oldPassword: this.oldPassword, newPassword: this.newPassword};
         ProfileController.changePassword(data as PasswordDataType);
-        //ProfileController.getUser();
     }
 
     render() {

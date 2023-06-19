@@ -141,7 +141,7 @@ export class EditProfile extends Block {
           } });
         this.children.modal = new Modal({});
         this.children.image = new Image({
-            src: (user ? 'https://ya-praktikum.tech/api/v2/resources' + user.avatar : profilePhoto),
+            src: (user.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + user.avatar : profilePhoto),
             alt: "Profile photo",
             class: "avatar",
             events: {

@@ -7,6 +7,8 @@ import AuthController from "../../controllers/AuthController";
 import { SignInDataType } from "api/auth";
 import { withRouter } from "../../hocs/withRouter";
 import store, { StoreEvents } from "../../core/Store";
+import { Link } from "../../components/Link";
+import Router from "../../core/Router";
 
 class LoginPage extends Block {
 
@@ -38,7 +40,8 @@ class LoginPage extends Block {
             }
         });
         this.children.input = new Input({
-            forAndName: 'login', labelClass: 'label', labelText: 'Логин', inputType: 'text', inputClass: 'input', events:
+            forAndName: 'login', labelClass: 'label', labelText: 'Логин', inputType: 'text', inputClass: 'input',
+            events:
                 {
                 focus: () => {
                     validationLogin(this.children.input);
@@ -47,7 +50,9 @@ class LoginPage extends Block {
                     validationLogin(this.children.input);
                 }
         }});
-        this.children.input2 = new Input({ forAndName: 'password', labelClass: 'label', labelText: 'Пароль', inputType: 'password', inputClass: 'input', events:
+        this.children.input2 = new Input({
+            forAndName: 'password', labelClass: 'label', labelText: 'Пароль', inputType: 'password', inputClass: 'input',
+            events:
             {
             focus: () => {
                 validationPassword(this.children.input2);
@@ -55,7 +60,16 @@ class LoginPage extends Block {
             blur: () => {
                 validationPassword(this.children.input2);
             }
-        }});
+        }
+        });
+        this.children.registration = new Link({
+            linkClass: 'form__link', linkText: 'Нет аккаунта?', linkSrc: "/sign-up",
+            events: {
+                click: () => {
+                    Router.go('/sign-up');
+                } 
+            }
+        });
     }
 
     onSubmit() {

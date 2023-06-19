@@ -37,14 +37,8 @@ class Route {
     }
 
     render() {
-        if (this._block === null) {
             this._block = new this._blockClass({});
             renderDOM(this._block);
-        } else {
-            //console.log(this._block)
-            //this._block.show();
-            renderDOM(this._block);
-        }
       }
 }
 

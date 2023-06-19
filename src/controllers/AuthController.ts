@@ -26,6 +26,10 @@ export class AuthController {
     async signup(data: SignUpDataType) {
         try {
             await this.api.signup(data);
+            await this.api.signin(data);
+            const user = await this.api.read();
+            console.log(user);
+            store.set('user', user );
             Router.go('/messenger');
         } catch (e: any) {
             console.error(e);
@@ -38,6 +42,7 @@ export class AuthController {
         ChatsController.closeAll();
         await this.api.logout();
         store.set('user', null);
+        store.set('chats', []);
         Router.go('/');
     } catch (e: any) {
         console.error(e);

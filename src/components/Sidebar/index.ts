@@ -21,7 +21,7 @@ export class Sidebar extends Block {
         this.children.chatSidebar = new ChatSidebar({chats});
         this.children.chatModal = new ChatModal({});
         this.children.addChat = new Link({
-            linkClass: 'addChat', linkText: 'Создать чат',
+            linkClass: 'addChat', linkText: 'Создать чат', linkSrc: "",
             events: {
                 click: () => {
                     const modal = document.querySelector('.modal') as HTMLElement;
@@ -30,7 +30,7 @@ export class Sidebar extends Block {
             }
         });
         this.children.profileLink = new Link({
-          linkClass: 'chat__link', linkText: 'Профиль >',
+          linkClass: 'chat__link', linkText: 'Профиль >', linkSrc: "/settings",
           events: {
               click: () => {
                   Router.go('/settings');

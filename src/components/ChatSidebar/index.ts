@@ -1,6 +1,8 @@
 import { Block } from '../../core/Block';
 import template from './chatSidebar.hbs';
 import store, { StoreEvents } from '../../core/Store';
+import { Image } from '../Image';
+import defaultImage from "../../assets/usersImg.png"
 
 type chat = {
   avatar: string | null;
@@ -27,6 +29,14 @@ export class ChatSidebar extends Block {
 
     store.on(StoreEvents.Updated, () => {
       this.setProps(store.getState());
+        });
+    }
+
+    init() {
+        this.children.imageDefault = new Image({
+            src: defaultImage,
+            alt: "Profile photo",
+            class: "avatar"
         });
     }
 

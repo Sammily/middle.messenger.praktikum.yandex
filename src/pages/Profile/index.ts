@@ -61,13 +61,13 @@ class Profile extends Block {
             }
           } });
         this.children.image = new Image({
-            src: (user ? 'https://ya-praktikum.tech/api/v2/resources' + user.avatar : profilePhoto),
+            src: (user.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + user.avatar : profilePhoto),
             alt: "Profile photo",
             class: "avatar"
         });
 
         this.children.logout = new Link({
-            linkClass: 'red-link', linkText: 'Выйти',
+            linkClass: 'red-link', linkText: 'Выйти', linkSrc: "",
             events: {
                 click: () => {
                     this.clickLogoutBtn();
@@ -76,19 +76,19 @@ class Profile extends Block {
         });
 
         this.children.editProfile = new Link({
-            linkClass: 'profile__link', linkText: 'Изменить данные',
+            linkClass: 'profile__link', linkText: 'Изменить данные', linkSrc: "/edit-profile",
             events: {
                 click: () => {
-                    Router.go('/edit-profile')
+                    Router.go('/edit-profile');
                 } 
             }
         });
 
         this.children.editPassword = new Link({
-            linkClass: 'profile__link', linkText: 'Изменить пароль',
+            linkClass: 'profile__link', linkText: 'Изменить пароль', linkSrc: "/edit-password",
             events: {
                 click: () => {
-                    Router.go('/edit-password')
+                    Router.go('/edit-password');
                 } 
             }
         });
