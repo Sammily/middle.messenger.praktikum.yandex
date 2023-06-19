@@ -26,7 +26,7 @@ export class AuthController {
     async signup(data: SignUpDataType) {
         try {
             await this.api.signup(data);
-            await this.api.signin(data);
+            await this.api.signin({login: data.login, password: data.password});
             const user = await this.api.read();
             console.log(user);
             store.set('user', user );
