@@ -4,8 +4,9 @@ import { Sidebar } from '../../components/Sidebar';
 import { MessagePanel } from '../../components/MessagePanel';
 import store, { StoreEvents } from '../../core/Store';
 import ChatsController from '../../controllers/ChatsController';
+import { withRouter } from '../../hocs/withRouter';
 
-export class ChatActive extends Block {
+class ChatActive extends Block {
   constructor(props: object | undefined) {
     super(props);
 
@@ -25,3 +26,5 @@ export class ChatActive extends Block {
     return this.compile(template, { ...this.props});
   }
 }
+
+export default withRouter(ChatActive);

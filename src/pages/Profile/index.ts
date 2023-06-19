@@ -67,7 +67,7 @@ class Profile extends Block {
         });
 
         this.children.logout = new Link({
-            linkClass: 'red-link', linkText: 'Выйти', linkSrc: "",
+            linkClass: 'red-link', linkText: 'Выйти',
             events: {
                 click: () => {
                     this.clickLogoutBtn();
@@ -76,7 +76,7 @@ class Profile extends Block {
         });
 
         this.children.editProfile = new Link({
-            linkClass: 'profile__link', linkText: 'Изменить данные', linkSrc: "/edit-profile",
+            linkClass: 'profile__link', linkText: 'Изменить данные',
             events: {
                 click: () => {
                     Router.go('/edit-profile');
@@ -85,7 +85,7 @@ class Profile extends Block {
         });
 
         this.children.editPassword = new Link({
-            linkClass: 'profile__link', linkText: 'Изменить пароль', linkSrc: "/edit-password",
+            linkClass: 'profile__link', linkText: 'Изменить пароль',
             events: {
                 click: () => {
                     Router.go('/edit-password');

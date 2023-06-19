@@ -1,10 +1,10 @@
 <section class="sidebar-user-chat">
   {{#each chats}}
-  <div class="sidebar-user-chat__chats-container">
+  <div class="sidebar-user-chat__chats-container" id="{{this.id}}">
     {{#if this.avatar}}
-        <img src={{this.avatar}} alt='chat avatar' class='sidebar-user-chat__user-photo' />
+    <img src={{this.avatar}} alt='chat avatar' class='sidebar-user-chat__user-photo' />
     {{else}}
-        <span class='sidebar-user-chat__user-photo'></span>
+    <span class='sidebar-user-chat__user-photo'></span>
     {{/if}}
     <div class="sidebar-user-chat__preview">
       <p class="sidebar-user-chat__chat-name">{{this.title}}</p>

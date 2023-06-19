@@ -30,7 +30,7 @@ export class ChatsController {
         console.log(store)
         chats.map(async (chat) => {
             const token = await this.getToken(chat.id);
-            console.log('get token', token);
+            //console.log('get token', token);
             await this.connect(chat.id, token);
         });
     } catch (e: any) {

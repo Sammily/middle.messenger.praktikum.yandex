@@ -4,7 +4,6 @@ import template from './link.hbs';
 type LinkProps = {
     linkClass: string;
     linkText: string;
-    linkSrc: string;
     events?: {
       click: (evt: PointerEvent) => void;
     };

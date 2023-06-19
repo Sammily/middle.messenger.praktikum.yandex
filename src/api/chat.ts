@@ -36,7 +36,7 @@ export class ChatAPI extends BaseAPI {
     async getToken(id: number) {
         const result = await this.http.post(`/token/${id}`,{ method: 'post', timeout: 5000 }) as {token: string};
         return result.token;
-      }
+    }
 
     update = undefined;
     delete = undefined;

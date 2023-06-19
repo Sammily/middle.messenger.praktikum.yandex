@@ -6,7 +6,7 @@ import { Registration } from './pages/Registration';
 import { Error400 } from './pages/Page400';
 import { Error500 } from './pages/Page500';
 import { AddDeleteUserPanel } from './components/AddDeleteUserPanel';
-import { ChatActive } from './pages/ChatActive';
+import ChatActive from './pages/ChatActive';
 import Router from './core/Router';
 import AuthController from './controllers/AuthController';
 

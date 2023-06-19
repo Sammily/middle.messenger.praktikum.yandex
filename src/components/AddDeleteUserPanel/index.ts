@@ -11,7 +11,7 @@ export class AddDeleteUserPanel extends Block {
 
     init() {
       const testUser = {
-        users: [1046574],
+        users: [1069406],
         chatId: 13063
       };
 
