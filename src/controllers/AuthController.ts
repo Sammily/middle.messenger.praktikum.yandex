@@ -40,6 +40,7 @@ export class AuthController {
         store.set('user', null);
         store.set('chats', null);
         store.set('currentChat', null);
+        store.set('messages', null);
         Router.go('/');
     } catch (e: any) {
         console.error(e);

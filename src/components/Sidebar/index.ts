@@ -1,14 +1,34 @@
 import { Link } from '../../components/Link';
 import { ChatModal } from '../../components/AddChatModal';
-import ChatSidebar from '../../components/ChatSidebar';
 import { Block } from '../../core/Block';
 import template from './sidebar.hbs';
 import store, { StoreEvents } from '../../core/Store';
 import Router from '../../core/Router';
+import { ChatProps } from 'pages/ChatActive';
+import { ChatItem } from '../../components/ChatItem';
+import ChatsController from '../../controllers/ChatsController';
+import { withRouter } from '../../hocs/withRouter';
 
+const tempChat = {chats: [{
+    avatar: null,
+    created_by: 1,
+    id: 1,
+    last_message: null,
+    title: 'default',
+    unread_count: 0
+},
+{
+    avatar: null,
+    created_by: 2,
+    id: 2,
+    last_message: null,
+    title: 'default',
+    unread_count: 0
+}]
+}
 
-export class Sidebar extends Block {
-  constructor(props: object | undefined) {
+class Sidebar extends Block {
+  constructor(props: ChatProps) {
     super(props);
 
     store.on(StoreEvents.Updated, () => {
@@ -17,8 +37,13 @@ export class Sidebar extends Block {
   }
     
     init() {
-        const chats = store.getState().chats;
-        this.children.chatSidebar = new ChatSidebar({chats});
+        console.log(this.props);
+        if (this.props.chats.length === 0) {
+            this.children.chatList = this.createItems(tempChat);
+        } else {
+            this.children.chatList = this.createItems(this.props);
+        }
+        this.children.chatList = this.createItems(tempChat);
         this.children.chatModal = new ChatModal({});
         this.children.addChat = new Link({
             linkClass: 'addChat', linkText: 'Создать чат',
@@ -39,7 +64,22 @@ export class Sidebar extends Block {
       });
     }
 
+    createItems(props: ChatProps) {
+        return props.chats!.map(data => {
+            return new ChatItem({
+                ...data,
+                events: {
+                    click: () => {
+                        ChatsController.checkedChat(data.id);
+                    }
+                }
+            });
+        })
+    }
+
     render() {
     return this.compile(template, { ...this.props});
   }
 }
+
+export default withRouter(Sidebar);

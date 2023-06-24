@@ -1,6 +1,6 @@
 import { Block } from '../../core/Block';
 import template from './chatActive.hbs';
-import { Sidebar } from '../../components/Sidebar';
+import Sidebar from '../../components/Sidebar';
 import MessagePanel from '../../components/MessagePanel';
 import store, { StoreEvents } from '../../core/Store';
 import ChatsController from '../../controllers/ChatsController';
@@ -41,10 +41,9 @@ class ChatActive extends Block {
         });
     }
     
-    init() {
-        ChatsController.getChats();
-        this.children.sidebar = new Sidebar({});
-        
+    async init() {
+        await ChatsController.getChats();
+        this.children.sidebar = new Sidebar(this.props);
         this.children.message = new MessagePanel({});
     }
 
