@@ -1,7 +1,7 @@
 import { Block } from '../../core/Block';
 import template from './chatItem.hbs';
 import store, { StoreEvents } from '../../core/Store';
-import { Chat} from 'pages/ChatActive';
+import { ChatType } from 'pages/Chat';
 
 type ChatItemType = {
     events?: {
@@ -10,7 +10,7 @@ type ChatItemType = {
 }
 
 export class ChatItem extends Block {
-  constructor(props: Chat & ChatItemType ) {
+  constructor(props: ChatType & ChatItemType ) {
     super(props);
 
     store.on(StoreEvents.Updated, () => {

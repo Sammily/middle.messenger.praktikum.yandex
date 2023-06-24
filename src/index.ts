@@ -6,14 +6,14 @@ import { Registration } from './pages/Registration';
 import { Error400 } from './pages/Page400';
 import { Error500 } from './pages/Page500';
 import { AddDeleteUserPanel } from './components/AddDeleteUserPanel';
-import ChatActive from './pages/ChatActive';
+import Chat from './pages/Chat';
 import Router from './core/Router';
 import AuthController from './controllers/AuthController';
 
 window.addEventListener('DOMContentLoaded', async() => {
     Router
         .use('/', LoginPage)
-        .use('/messenger', ChatActive)
+        .use('/messenger', Chat)
         .use('/settings', Profile)
         .use('/edit-profile', EditProfile)
         .use('/edit-password', EditPassword)

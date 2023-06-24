@@ -26,7 +26,7 @@ export class AuthController {
         try {
             await this.api.signup(data);
             const user = await this.api.read();
-            store.set('user', user );
+            store.set('user', user);
             Router.go('/messenger');
         } catch (e: any) {
             console.error(e);

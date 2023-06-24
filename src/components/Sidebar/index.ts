@@ -4,10 +4,9 @@ import { Block } from '../../core/Block';
 import template from './sidebar.hbs';
 import store, { StoreEvents } from '../../core/Store';
 import Router from '../../core/Router';
-import { ChatProps } from 'pages/ChatActive';
+import { ChatProps } from 'pages/Chat';
 import { ChatItem } from '../../components/ChatItem';
 import ChatsController from '../../controllers/ChatsController';
-import { withRouter } from '../../hocs/withRouter';
 
 const tempChat = {chats: [{
     avatar: null,
@@ -37,13 +36,15 @@ class Sidebar extends Block {
   }
     
     init() {
-        console.log(this.props);
+        this.props = store.getState();
+        console.log(this.props.chats.length);
         if (this.props.chats.length === 0) {
             this.children.chatList = this.createItems(tempChat);
         } else {
             this.children.chatList = this.createItems(this.props);
         }
-        this.children.chatList = this.createItems(tempChat);
+        
+        
         this.children.chatModal = new ChatModal({});
         this.children.addChat = new Link({
             linkClass: 'addChat', linkText: 'Создать чат',
@@ -61,7 +62,7 @@ class Sidebar extends Block {
                   Router.go('/settings');
               } 
           }
-      });
+        });     
     }
 
     createItems(props: ChatProps) {
@@ -82,4 +83,4 @@ class Sidebar extends Block {
   }
 }
 
-export default withRouter(Sidebar);
+export default Sidebar;

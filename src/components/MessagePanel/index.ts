@@ -8,8 +8,7 @@ import arrowButton from "../../assets/arrowButton.png";
 import ChatsController from '../../controllers/ChatsController';
 import Router from '../../core/Router';
 import store, { StoreEvents } from '../../core/Store';
-import { withRouter } from '../../hocs/withRouter';
-import { ChatProps } from '../../pages/ChatActive';
+import { ChatProps } from '../../pages/Chat';
 
 class MessagePanel extends Block { 
     constructor(props: ChatProps) {
@@ -59,4 +58,4 @@ class MessagePanel extends Block {
   }
 }
 
-export default withRouter(MessagePanel);
+export default MessagePanel;

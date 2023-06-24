@@ -1,5 +1,5 @@
 import { Block } from '../../core/Block';
-import template from './chatActive.hbs';
+import template from './chat.hbs';
 import Sidebar from '../../components/Sidebar';
 import MessagePanel from '../../components/MessagePanel';
 import store, { StoreEvents } from '../../core/Store';
@@ -15,7 +15,7 @@ export type LastMessage = {
     id: number
 }
 
-export type Chat = {
+export type ChatType = {
     avatar: null | string;
     created_by: number;
     id: number;
@@ -28,11 +28,11 @@ export type ChatProps = {
     router?: typeof Router;
     _id?: string;
     user?: UserType;
-    chats?: Chat[];
+    chats?: ChatType[];
     currentChat?: number;
 }
 
-class ChatActive extends Block {
+class Chat extends Block {
     constructor(props: ChatProps) {
         super(props);
 
@@ -43,8 +43,8 @@ class ChatActive extends Block {
     
     async init() {
         await ChatsController.getChats();
-        this.children.sidebar = new Sidebar(this.props);
-        this.children.message = new MessagePanel({});
+        this.children.sidebar = new Sidebar({});
+        this.children.messagePanel = new MessagePanel({});
     }
 
     render() {
@@ -52,4 +52,4 @@ class ChatActive extends Block {
     }
 }
 
-export default withRouter(ChatActive);
+export default withRouter(Chat);

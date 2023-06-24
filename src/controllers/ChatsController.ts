@@ -26,7 +26,8 @@ export class ChatsController {
   async getChats() {
       try {
         const chats = await this.api.read() as ChatsType[];
-        store.set('chats', chats);
+          store.set('chats', chats);
+          store.set('currentChat', 0);
         chats.map(async (chat) => {
             const token = await this.getToken(chat.id);
             await this.connect(chat.id, token);
