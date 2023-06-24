@@ -14,7 +14,7 @@ import Router from '../../core/Router';
 
 class EditPassword extends Block {
 
-    constructor(props: object | undefined) {
+    constructor(props: any) {
         super(props);  
     
         store.on(StoreEvents.Updated, () => {
@@ -37,7 +37,6 @@ class EditPassword extends Block {
             this.oldPassword = formData.get('oldPassword');
             this.newPassword = formData.get('newPassword');
             const newPasswordAgain = formData.get('newPasswordAgain');
-            console.log('formData: ', this.oldPassword, this.newPassword, newPasswordAgain);
             this.onSubmit();
         } 
         }  });

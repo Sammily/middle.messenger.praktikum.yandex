@@ -1,18 +1,21 @@
 import { Block } from '../../core/Block';
 import template from './chatItem.hbs';
 import store, { StoreEvents } from '../../core/Store';
+import { Chat} from 'pages/ChatActive';
+
+type ChatItemType = {
+    events?: {
+      click: (evt: PointerEvent) => void;
+    };
+}
 
 export class ChatItem extends Block {
-  constructor(props: object | undefined) {
+  constructor(props: Chat & ChatItemType ) {
     super(props);
 
     store.on(StoreEvents.Updated, () => {
       this.setProps(store.getState());
         });
-    }
-
-    init() {
-        const chats = store.getState().chats;
     }
 
     render() {

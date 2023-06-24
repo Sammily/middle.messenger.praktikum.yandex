@@ -1,23 +1,3 @@
 <section class="sidebar-user-chat">
-  {{#each chats}}
-  <div class="sidebar-user-chat__chats-container" id="{{this.id}}">
-    {{#if this.avatar}}
-    <img src={{this.avatar}} alt='chat avatar' class='sidebar-user-chat__user-photo' />
-    {{else}}
-    <span class='sidebar-user-chat__user-photo'></span>
-    {{/if}}
-    <div class="sidebar-user-chat__preview">
-      <p class="sidebar-user-chat__chat-name">{{this.title}}</p>
-      {{#if this.last_message.content}}
-      <p class="sidebar-user-chat__chat-text-preview">{{this.last_message.content}}</p>
-      {{else}}
-      <p class="sidebar-user-chat__chat-text-preview">Превью текста чата</p>
-      {{/if}}
-    </div>
-    <div class="sidebar-user-chat__details">
-      <span class="time">11:48</span>
-      <span class="badge">2</span>
-    </div>
-  </div>
-  {{/each}}
+    {{{chatList}}}
 </section>

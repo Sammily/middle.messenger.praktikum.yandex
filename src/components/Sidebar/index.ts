@@ -1,6 +1,6 @@
 import { Link } from '../../components/Link';
 import { ChatModal } from '../../components/AddChatModal';
-import { ChatSidebar } from '../../components/ChatSidebar';
+import ChatSidebar from '../../components/ChatSidebar';
 import { Block } from '../../core/Block';
 import template from './sidebar.hbs';
 import store, { StoreEvents } from '../../core/Store';

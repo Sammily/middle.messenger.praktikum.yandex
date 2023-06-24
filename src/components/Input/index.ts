@@ -15,7 +15,7 @@ type InputProps = {
     }
 }
 
-export class Input extends Block {
+export class Input extends Block<any> {
   constructor(props: InputProps) {
     super(props)
   }

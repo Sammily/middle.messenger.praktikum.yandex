@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', async() => {
             Router.go('/messenger');
         }
     } catch (e) {
-        console.log(e);
+        //console.log(e);
         Router.start();
 
         if (isProtectedRoute) {

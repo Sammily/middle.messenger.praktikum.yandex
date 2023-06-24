@@ -19,7 +19,6 @@ export class Modal extends Block {
                     const form = document.getElementById('modal') as HTMLFormElement;
                     const formData = new FormData(form);
                     this.avatar = formData.get('avatar');
-                    console.log('formData: ', formData);
                     ProfileController.changeAvatar(new FormData(form));
                 }
             }

@@ -39,7 +39,6 @@ export class ProfileAPI extends BaseAPI {
     }
 
     changeAvatar(data: any) {
-        console.log(data);
         return this.http.put('/profile/avatar', { data: data, method: 'put', timeout: 5000 });
     }
 

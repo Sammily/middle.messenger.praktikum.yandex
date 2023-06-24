@@ -79,7 +79,6 @@ class Router {
 
     _onRoute(pathname: string) {
         const route = this.getRoute(pathname);
-        //console.log(pathname, route)
         if (!route) {
           return;
         }

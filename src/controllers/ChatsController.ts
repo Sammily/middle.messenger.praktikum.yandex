@@ -3,7 +3,7 @@ import API, { ChatAPI, CreateChatType, DeleteOrAddUserFromChat } from '../api/ch
 import WS from '../core/WebSocket';
 //import Router from '../core/Router';
 
-type ChatsType = {
+export type ChatsType = {
     avatar: string | null;
     created_by: number;
     id: number;
@@ -27,10 +27,8 @@ export class ChatsController {
       try {
         const chats = await this.api.read() as ChatsType[];
         store.set('chats', chats);
-        console.log(store)
         chats.map(async (chat) => {
             const token = await this.getToken(chat.id);
-            //console.log('get token', token);
             await this.connect(chat.id, token);
         });
     } catch (e: any) {
@@ -62,9 +60,9 @@ export class ChatsController {
     } catch (e: any) {
       console.error(e.message);
     }
-  }
-
-  //websocket
+    }
+    
+//websocket
   private sockets = new Map();
 
   async connect(id: number, token: string) {
@@ -77,7 +75,8 @@ export class ChatsController {
     this.sockets.set(id,ws);
     await ws.connect();
 
-    this.subscribe(ws, id);
+      this.subscribe(ws, id);
+      this.getOldMessages(id);
   }
 
   subscribe(ws: WS, id: number) {
@@ -101,11 +100,9 @@ export class ChatsController {
 
     sendMessage(id: number, message: string) {
         const socket = this.sockets.get(id);
-
         if (!socket) {
             throw new Error('Socket error');
         }
-
         socket.send({
             type: 'message',
             content: message,
@@ -120,6 +117,17 @@ export class ChatsController {
         Array.from(this.sockets.values()).forEach(socket => socket.close());
     }
 
+    getOldMessages(id: number) {
+        const socket = this.sockets.get(id);
+        if (!socket) {
+          throw new Error('Socket error');
+        }
+        socket.send({type: 'get old', content: '0'});
+    }
+    
+    checkedChat(id: number) {
+        store.set('currentChat', id);
+    }
 }
 
 export default new ChatsController();

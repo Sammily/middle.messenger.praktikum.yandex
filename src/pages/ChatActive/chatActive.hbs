@@ -1,4 +1,8 @@
   <main class="chat__container">
     {{{sidebar}}}
+    {{#if currentChat}}
     {{{message}}}
+    {{else}}
+    <section class="chat__chat">Выберите чат чтобы отправить сообщение</section>
+    {{/if}}
   </main>
