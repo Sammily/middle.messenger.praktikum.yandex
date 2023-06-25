@@ -10,15 +10,25 @@ type ChatItemType = {
 }
 
 export class ChatItem extends Block {
-  constructor(props: ChatType & ChatItemType ) {
-    super(props);
+    constructor(props: ChatType & ChatItemType ) {
+        super(props);
 
-    store.on(StoreEvents.Updated, () => {
-      this.setProps(store.getState());
-        });
+        store.on(StoreEvents.Updated, () => {
+        this.setProps(store.getState());
+            });
+    }
+
+    init() {
+        const todayDate = new Date().toLocaleDateString();
+        const messageDate = new Date(this.props.last_message.time).toLocaleDateString();
+        if (todayDate === messageDate) {
+            this.props.time = new Date(this.props.last_message.time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        } else {
+            this.props.time = messageDate;
+        }
     }
 
     render() {
-    return this.compile(template, { ...this.props});
+    return this.compile(template, { ...this.props });
   }
 }

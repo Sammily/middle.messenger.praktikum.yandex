@@ -48,6 +48,7 @@ class MessagePanel extends Block {
                 console.log(chatID, message);
                 ChatsController.sendMessage(chatID, message as string);
                 //Router.go('/messenger');
+                    
                 }
             }
         });

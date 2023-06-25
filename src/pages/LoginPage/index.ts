@@ -34,7 +34,6 @@ class LoginPage extends Block {
                 const formData = new FormData(form);
                 this.login = formData.get('login');
                 this.password = formData.get('password');
-                console.log('formData: ', this.login, this.password);
                 this.onSubmit();
             } 
             }

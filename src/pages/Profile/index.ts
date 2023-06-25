@@ -24,6 +24,7 @@ class Profile extends Block {
 
     init() {
         const user = store.getState().user;
+        this.props.name = user.first_name;
         console.log(user);
         this.children.input = new Input({
             forAndName: 'email', labelClass: 'profile__label',
