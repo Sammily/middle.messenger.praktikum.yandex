@@ -1,14 +1,21 @@
-<section class="add-and-delete-user-panel">
-  <form id="addDeleteUserForm" class="add-and-delete-user-form">
+<section class="modal" id="addDeleteUser">
+    <div class="modal__content-container">
+  {{{close}}}
+  <form id="addDeleteUserForm">
+
     <input type="text" name="UserName" class="add-and-delete-user-form-input">
-    <label for="UserName" class="sidebar-user-chat__chat-text-preview ">Введите логин юзера</label>
+    <label for="UserName" class="sidebar-user-chat__chat-text-preview ">Введите имя пользователя</label>
+
     <div class="add-and-delete-user-panel__add-user-container">
       {{{image}}}
-      <span>Добавить пользователя</span>
+      <span class="sidebar-user-chat__chat-text-preview">Добавить пользователя</span>
     </div>
+    
     <div class="add-and-delete-user-panel__delete-user-container">
       {{{image2}}}
-      <span>Удалить пользователя</span>
+      <span class="sidebar-user-chat__chat-text-preview">Удалить пользователя</span>
     </div>
+
   </form>
+  </div>
 </section>

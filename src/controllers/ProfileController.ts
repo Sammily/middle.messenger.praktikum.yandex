@@ -37,6 +37,15 @@ export class ProfileController {
             console.error(e);
         }
     }
+
+    async searchUser(login: string) {
+        try {
+            console.log(login);
+            await this.api.search(login);
+        } catch (e: any) {
+            console.error(e);
+        }
+    }
 }
 
 export default new ProfileController();

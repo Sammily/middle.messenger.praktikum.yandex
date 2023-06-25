@@ -13,6 +13,7 @@ export class ChatModal extends Block {
     chatName: FormDataEntryValue | null = null;
 
     init() {
+
         this.children.button = new Button({
             buttonClass: 'btn', type: 'submit', buttonText: 'Создать',
             events: {
@@ -22,6 +23,16 @@ export class ChatModal extends Block {
                     const formData = new FormData(form);
                     this.chatName = formData.get('chatName');
                     this.onSubmit();
+                    const modal = document.querySelector('.modal') as HTMLElement;
+                    modal.style.visibility = 'hidden';
+                }
+            }
+        });
+        this.children.close = new Button({
+            buttonClass: 'close-btn', type: 'button', buttonText: 'X',
+            events: {
+                click: (evt) => {
+                    evt.preventDefault();
                     const modal = document.querySelector('.modal') as HTMLElement;
                     modal.style.visibility = 'hidden';
                 }

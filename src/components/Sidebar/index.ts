@@ -7,6 +7,7 @@ import Router from '../../core/Router';
 import { ChatProps } from 'pages/Chat';
 import { ChatItem } from '../../components/ChatItem';
 import ChatsController from '../../controllers/ChatsController';
+import { AddDeleteUserPanel } from '../../components/AddDeleteUserPanel';
 
 const tempChat = {chats: [{
     avatar: null,
@@ -46,6 +47,7 @@ class Sidebar extends Block {
         
         
         this.children.chatModal = new ChatModal({});
+        this.children.addOrDeleteUserModal = new AddDeleteUserPanel({});
         this.children.addChat = new Link({
             linkClass: 'addChat', linkText: 'Создать чат',
             events: {

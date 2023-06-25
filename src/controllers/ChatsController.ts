@@ -55,12 +55,12 @@ export class ChatsController {
     }
   }
 
-  async deleteUserFromChat(data: DeleteOrAddUserFromChat) {
-    try {
-      await this.api.deleteUser(data);
-    } catch (e: any) {
-      console.error(e.message);
-    }
+    async deleteUserFromChat(data: DeleteOrAddUserFromChat) {
+        try {
+            await this.api.deleteUser(data);
+        } catch (e: any) {
+            console.error(e.message);
+        }
     }
     
 //websocket

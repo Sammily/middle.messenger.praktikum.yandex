@@ -45,6 +45,10 @@ export class ProfileAPI extends BaseAPI {
     read(id: string) {
         return this.http.get(`/user/{${id}}`,{ method: 'get', timeout: 5000 });
     }
+
+    search(login: string) {
+        return this.http.post(`/search`, { data: {login: login }, method: 'post', timeout: 5000 });
+    }
     
     create = undefined;
     update = undefined;

@@ -9,6 +9,8 @@ import ChatsController from '../../controllers/ChatsController';
 import Router from '../../core/Router';
 import store, { StoreEvents } from '../../core/Store';
 import { ChatProps } from '../../pages/Chat';
+import ProfileController from 'controllers/ProfileController';
+import { Link } from 'components/Link';
 
 class MessagePanel extends Block { 
     constructor(props: ChatProps) {
@@ -25,7 +27,9 @@ class MessagePanel extends Block {
             src: dotsMenu, alt: "dots menu", class: "chat-panel__dots-menu",
             events: {
                 click: () => {
-                    Router.go('/addAndDeleteUser');
+                    //Router.go('/addAndDeleteUser');
+                    const modal = document.querySelector('#addDeleteUser') as HTMLElement;
+                    modal.style.visibility = 'visible';
                 } 
             }
         });
