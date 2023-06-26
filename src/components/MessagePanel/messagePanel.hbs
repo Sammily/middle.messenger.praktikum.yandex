@@ -9,6 +9,13 @@
     <div class="chat-panel_messages-container">
       Здесь будут сообщения
     </div>
+    {{#each message}}
+        <div class="message">
+            {{this.user_id}}
+            {{this.content}}
+            {{{this.time}}}
+        </div>
+    {{/each}}
   </div>
   <div class="chat-panel__send-container">
     <form id="form">

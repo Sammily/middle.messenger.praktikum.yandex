@@ -6,11 +6,9 @@ import dotsMenu from "../../assets/dotsButton.png";
 import clipButton from "../../assets/clipButton.png";
 import arrowButton from "../../assets/arrowButton.png";
 import ChatsController from '../../controllers/ChatsController';
-import Router from '../../core/Router';
 import store, { StoreEvents } from '../../core/Store';
-import { ChatProps } from '../../pages/Chat';
-import ProfileController from 'controllers/ProfileController';
-import { Link } from 'components/Link';
+import { ChatProps, MessageType } from '../../pages/Chat';
+import { Message } from '../../components/Message';
 
 class MessagePanel extends Block { 
     constructor(props: ChatProps) {
@@ -56,6 +54,26 @@ class MessagePanel extends Block {
                 }
             }
         });
+    }
+
+    componentDidUpdate(oldProps: ChatProps, newProps: ChatProps): boolean {
+        const chatIdChanged = newProps.currentChat !== oldProps.currentChat;
+        const chatSelected = Boolean(newProps.currentChat);
+        if (chatIdChanged && chatSelected) {
+            console.log(newProps);
+            const currentMessages = newProps.messages![this.props.currentChat];
+            console.log(currentMessages);
+            this.setProps({ message: currentMessages });
+        }
+        return true;
+    }
+
+    renderMessages() {
+        if (this.props.messages?.length > 0) {
+            this.children.messages = this.props.message.map((msg: MessageType) => {
+                return new Message({ ...msg });
+            })
+        }
     }
     
     render() {

@@ -5,7 +5,7 @@ import MessagePanel from '../../components/MessagePanel';
 import store, { StoreEvents } from '../../core/Store';
 import ChatsController from '../../controllers/ChatsController';
 import { withRouter } from '../../hocs/withRouter';
-import Router from 'core/Router';
+import Router from '../../core/Router';
 import { UserType } from 'api/profile';
 
 export type LastMessage = {
@@ -24,12 +24,28 @@ export type ChatType = {
     unread_count: number
 }
 
+export type MessageType = {
+    chat_id: number;
+    content: string;
+    file: null;
+    id: number;
+    is_read: boolean;
+    time: string;
+    type: string;
+    user_id: number;
+}
+
+export type MessagesType = {
+    [x: number]: MessageType[];
+}
+
 export type ChatProps = {
     router?: typeof Router;
     _id?: string;
     user?: UserType;
-    chats?: ChatType[];
+    chats?: ChatType[] | [] | undefined;
     currentChat?: number;
+    messages?: MessagesType;
 }
 
 class Chat extends Block {
@@ -42,7 +58,8 @@ class Chat extends Block {
     }
     
     async init() {
-        await ChatsController.getChats();
+        ChatsController.getChats();
+        //await ChatsController.getChats();
         this.children.sidebar = new Sidebar({});
         this.children.messagePanel = new MessagePanel({});
     }

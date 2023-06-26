@@ -137,7 +137,7 @@
 }
 
 .chat-panel_messages-container {
-  height: 65vh;
+  padding-bottom: 1.5rem;
   @mixin text #999999, 1.2rem, 1.2rem;
   align-items: center;
   justify-content: center;
@@ -193,4 +193,14 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+}
+
+.message {
+    min-height: 2rem;
+    width: 40rem;
+    background-color: #F8F8F8;
+    margin-bottom: 2rem;
+    border-radius: 1.2rem;
+    @mixin text #1E1E1E, 1.2rem, 1.5rem, 500;
+    padding: 1.1rem;
 }

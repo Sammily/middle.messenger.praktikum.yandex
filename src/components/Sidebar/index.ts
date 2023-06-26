@@ -16,14 +16,6 @@ const tempChat = {chats: [{
     last_message: null,
     title: 'default',
     unread_count: 0
-},
-{
-    avatar: null,
-    created_by: 2,
-    id: 2,
-    last_message: null,
-    title: 'default',
-    unread_count: 0
 }]
 }
 
@@ -38,13 +30,10 @@ class Sidebar extends Block {
     
     init() {
         this.props = store.getState();
-        console.log(this.props.chats.length);
-        if (this.props.chats.length === 0) {
-            this.children.chatList = this.createItems(tempChat);
-        } else {
+        if (Boolean(this.props.chats)) {
             this.children.chatList = this.createItems(this.props);
+            //this.children.chatList = this.createItems(tempChat);
         }
-        
         
         this.children.chatModal = new ChatModal({});
         this.children.addOrDeleteUserModal = new AddDeleteUserPanel({});
