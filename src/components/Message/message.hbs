@@ -1,5 +1,13 @@
-<div>
-    {{user_id}}
-    {{content}}
-    {{{time}}}
+<div class="message-container">
+        {{#if isMyMsg}}
+            <div class="my-message">
+                {{content}}
+                {{time}}
+            </div>
+        {{else}}
+            <div class="message">
+                {{content}}
+                {{time}}
+            </div>
+        {{/if}}
 </div>

@@ -13,41 +13,55 @@ export class AddDeleteUserPanel extends Block {
     userName: FormDataEntryValue | null = null;
 
     init() {
-      const testUser = {
-        users: [1069406],
-        chatId: 13063
-        };
-
-        this.children.image = new Image({ src: buttonImg, alt: "add icon", events: {
-            'click': async () => {
-                console.log(this.props);
-                const form = document.getElementById('addDeleteUserForm') as HTMLFormElement;
-                //console.log(form);
-                const formData = new FormData(form);
-                this.userName = formData.get('UserName');
-                console.log(this.userName as string);
-                const userObj = await ProfileController.searchUser(this.userName as string);
-                console.log(userObj);
-            //ChatsController.addUserFromChat(testUser);
-          }
-        }});
-        this.children.image2 = new Image({ src: buttonImg, alt: "delete icon", class: "delete-icon", events: {
-            'click': () => {
-                console.log(this.props);
-                const form = document.getElementById('addDeleteUserForm') as HTMLFormElement;
-                //console.log(form);
-                const formData = new FormData(form);
-                this.userName = formData.get('UserName');
-                console.log(this.userName);
-            //ChatsController.deleteUserFromChat(testUser);
-          }
-        }
-        });
         this.children.close = new Button({
             buttonClass: 'close-btn', type: 'button', buttonText: 'X',
             events: {
                 click: (evt) => {
                     evt.preventDefault();
+                    const modal = document.querySelector('#addDeleteUser') as HTMLElement;
+                    modal.style.visibility = 'hidden';
+                }
+            }
+        });
+
+        this.children.addUserBtn = new Button({
+            buttonClass: 'add-user-btn', type: 'button', buttonText: 'Добавить пользователя',
+            events: {
+                click: async () => {
+                    const form = document.getElementById('addDeleteUserForm') as HTMLFormElement;
+                    const formData = new FormData(form);
+                    this.userName = formData.get('UserName');
+                    const userObj = await ProfileController.searchUser(this.userName as string);
+                    console.log(userObj);
+                    console.log('add user from chat');
+                    //ChatsController.addUserFromChat(testUser);
+                }
+            }
+        });
+
+        this.children.deleteUserBtn = new Button({
+            buttonClass: 'delete-user-btn', type: 'button', buttonText: 'Удалить пользователя',
+            events: {
+                click: async () => {
+                    console.log(this.props);
+                    const form = document.getElementById('addDeleteUserForm') as HTMLFormElement;
+                    //console.log(form);
+                    const formData = new FormData(form);
+                    this.userName = formData.get('UserName');
+                    console.log(this.userName);
+                    const userObj = await ProfileController.searchUser(this.userName as string);
+                    console.log(userObj);
+                    console.log('delete user from chat');
+                    //ChatsController.deleteUserFromChat(testUser);
+                }
+            }
+        });
+        this.children.deleteChatBtn = new Button({
+            buttonClass: 'delete-btn', type: 'button', buttonText: 'Удалить чат',
+            events: {
+                click: (evt) => {
+                    evt.preventDefault();
+                    console.log('delete chat');
                     const modal = document.querySelector('#addDeleteUser') as HTMLElement;
                     modal.style.visibility = 'hidden';
                 }

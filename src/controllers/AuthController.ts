@@ -18,7 +18,14 @@ export class AuthController {
             store.set('user', user);
             Router.go('/messenger');
         } catch (e: any) {
-            console.error(e);
+            console.error(e.reason);
+            if (e.reason === 'User already in system') {
+                Router.go('/messenger');
+            }
+            if (e.reason === 'Login or password is incorrect') {
+                document.querySelector('.form-error')!.textContent = 'Неправильный логин или пароль';
+            }
+            document.querySelector('.form-error')!.textContent = '';
         }
     }
 

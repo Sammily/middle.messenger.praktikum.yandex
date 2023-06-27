@@ -1,21 +1,16 @@
 <section class="chat__sidebar">
-
   <div class="links-panel">
     {{{addChat}}}
     {{{profileLink}}}
   </div>
-
   <form class="search__form">
     <input type="text" placeholder="Поиск" class="search__input">
   </form>
-
   {{{chatModal}}}
   {{{addOrDeleteUserModal}}}
-
   <div class="sidebar-user-chat">
       {{#each chatList}}
         {{{this}}}
         {{/each}}
   </div>
-
 </section>

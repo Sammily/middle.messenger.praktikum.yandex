@@ -63,6 +63,9 @@ class Sidebar extends Block {
                 events: {
                     click: () => {
                         ChatsController.checkedChat(data.id);
+                        if (store.getState().currentChat === data.id) {
+                            document.getElementById(`${data.id}`)!.style.background = '#E4EDFD';
+                        }
                     }
                 }
             });

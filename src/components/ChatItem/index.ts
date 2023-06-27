@@ -26,6 +26,8 @@ export class ChatItem extends Block {
         } else {
             this.props.time = messageDate;
         }
+
+        this.props.previewMsg = this.props.last_message.content.slice(0,30)+'...';
     }
 
     render() {

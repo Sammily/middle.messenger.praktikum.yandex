@@ -10,6 +10,10 @@ import store, { StoreEvents } from '../../core/Store';
 import { ChatProps, MessageType } from '../../pages/Chat';
 import { Message } from '../../components/Message';
 
+export type MyID = {
+    myId: number;
+}
+
 class MessagePanel extends Block { 
     constructor(props: ChatProps) {
         super(props);
@@ -20,12 +24,13 @@ class MessagePanel extends Block {
     }
     
     init() {
+        store.set('currentChat', 0);
+        console.log(this.props);
         this.children.image = new Image({ src: userImg, alt: "user photo", class: "chat-panel__user-photo" });
         this.children.dotsMenu = new Image({
             src: dotsMenu, alt: "dots menu", class: "chat-panel__dots-menu",
             events: {
                 click: () => {
-                    //Router.go('/addAndDeleteUser');
                     const modal = document.querySelector('#addDeleteUser') as HTMLElement;
                     modal.style.visibility = 'visible';
                 } 
@@ -48,37 +53,38 @@ class MessagePanel extends Block {
                 const message = formData.get('message');
                 const chatID = this.props.currentChat;
                 console.log(chatID, message);
-                ChatsController.sendMessage(chatID, message as string);
-                //Router.go('/messenger');
-                    
+                ChatsController.sendMessage(chatID, message as string);                    
                 }
             }
         });
+
     }
 
     componentDidUpdate(oldProps: ChatProps, newProps: ChatProps): boolean {
         const chatIdChanged = newProps.currentChat !== oldProps.currentChat;
         const chatSelected = Boolean(newProps.currentChat);
         if (chatIdChanged && chatSelected) {
-            console.log(newProps);
-            const currentMessages = newProps.messages![this.props.currentChat];
-            console.log(currentMessages);
+            const currentMessages = newProps.messages![newProps.currentChat!];
             this.setProps({ message: currentMessages });
+            const chatInfo = newProps.chats!.filter(item => item.id === newProps.currentChat)[0];
+            this.setProps({ chatName: chatInfo.title});
         }
         return true;
     }
 
-    renderMessages() {
-        if (this.props.messages?.length > 0) {
-            this.children.messages = this.props.message.map((msg: MessageType) => {
-                return new Message({ ...msg });
+    updateMessages() {
+        if (this.props.message?.length > 0) {
+            this.children.msgList = this.props.message.map((msg: MessageType) => {
+                return new Message({ ...msg, myId: store.getState().user.id });
             })
         }
     }
-    
+   
     render() {
-    return this.compile(template, { ...this.props});
-  }
+        this.updateMessages();
+
+        return this.compile(template, { ...this.props});
+    }
 }
 
 export default MessagePanel;
