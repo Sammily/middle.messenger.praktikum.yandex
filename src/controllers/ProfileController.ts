@@ -18,8 +18,7 @@ export class ProfileController {
     }
 
     async getUser() {
-        const user = await this.api.read(store.getState().user.id);
-        console.log(user);
+        await this.api.read(store.getState().user.id);
     }
     
     async changePassword(data: PasswordDataType) {
@@ -40,7 +39,6 @@ export class ProfileController {
 
     async searchUser(login: string) {
         try {
-            console.log(login);
             await this.api.search(login);
         } catch (e: any) {
             console.error(e);

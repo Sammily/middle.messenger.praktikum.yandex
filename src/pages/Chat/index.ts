@@ -59,9 +59,13 @@ class Chat extends Block {
     
     async init() {
         ChatsController.getChats();
-        //await ChatsController.getChats();
         this.children.sidebar = new Sidebar({});
         this.children.messagePanel = new MessagePanel({});
+    }
+
+    componentDidUpdate(oldProps: any, newProps: any): boolean {
+        this.children.sidebar = new Sidebar({});
+        return true;
     }
 
     render() {

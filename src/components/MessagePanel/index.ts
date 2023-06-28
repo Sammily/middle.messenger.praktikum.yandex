@@ -25,7 +25,6 @@ class MessagePanel extends Block {
     
     init() {
         store.set('currentChat', 0);
-        console.log(this.props);
         this.children.image = new Image({ src: userImg, alt: "user photo", class: "chat-panel__user-photo" });
         this.children.dotsMenu = new Image({
             src: dotsMenu, alt: "dots menu", class: "chat-panel__dots-menu",
@@ -48,12 +47,13 @@ class MessagePanel extends Block {
                     } else {
                         (document.getElementById('error') as HTMLLabelElement).textContent = '';
                     }
-                const form = document.getElementById('form') as HTMLFormElement;
-                const formData = new FormData(form);
-                const message = formData.get('message');
-                const chatID = this.props.currentChat;
-                console.log(chatID, message);
-                ChatsController.sendMessage(chatID, message as string);                    
+                    const form = document.getElementById('form') as HTMLFormElement;
+                    const formData = new FormData(form);
+                    const message = formData.get('message');
+                    const chatID = this.props.currentChat;
+                    console.log(chatID, message);
+                    ChatsController.sendMessage(chatID, message as string);
+                    this.props.weHaveNew = true;
                 }
             }
         });
@@ -67,7 +67,7 @@ class MessagePanel extends Block {
             const currentMessages = newProps.messages![newProps.currentChat!];
             this.setProps({ message: currentMessages });
             const chatInfo = newProps.chats!.filter(item => item.id === newProps.currentChat)[0];
-            this.setProps({ chatName: chatInfo.title});
+            this.setProps({ chatName: chatInfo.title });
         }
         return true;
     }

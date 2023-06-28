@@ -50,7 +50,6 @@ export class EditProfile extends Block {
                     this.secondName = formData.get('second_name');
                     this.displayName = formData.get('display_name');
                     this.phone = formData.get('phone');
-                    console.log('formData: ', this.login, this.displayName, this.email, this.firstName, this.secondName, this.phone);
                     this.onSubmit();
                 } 
                 }

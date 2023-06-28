@@ -19,6 +19,9 @@ export class ChatItem extends Block {
     }
 
     init() {
+        if (!this.props.last_message) {
+            return;
+        }
         const todayDate = new Date().toLocaleDateString();
         const messageDate = new Date(this.props.last_message.time).toLocaleDateString();
         if (todayDate === messageDate) {

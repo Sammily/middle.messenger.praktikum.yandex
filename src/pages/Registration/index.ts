@@ -40,7 +40,6 @@ export class Registration extends Block {
             this.firstName = formData.get('first_name');
             this.secondName = formData.get('second_name');
             this.phone = formData.get('phone');
-            console.log('formData: ', this.login, this.password, this.passwordSecond, this.email, this.firstName, this.secondName, this.phone);
             this.onSubmit();
         } 
         } });
@@ -119,7 +118,6 @@ export class Registration extends Block {
             password: this.password as string,
             phone: this.phone as string
         };
-        //console.log(data);
         AuthController.signup(data as SignUpDataType);
     }
 
