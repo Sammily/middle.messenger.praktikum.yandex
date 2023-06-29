@@ -38,8 +38,11 @@ export class ChatAPI extends BaseAPI {
         return result.token;
     }
 
+    deleteChat(id: number) {
+        return this.http.delete('/', { data: { chatId: id }, method: 'delete', timeout: 5000 });
+    }
+    
     update = undefined;
-    delete = undefined;
 }
 
 export default new ChatAPI();

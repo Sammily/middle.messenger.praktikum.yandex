@@ -41,7 +41,6 @@ export class ChatsController {
     try {
       await this.api.create(data);
       this.getChats();
-      //Router.go('/messenger');
     } catch (e: any) {
       console.error(e.message);
     }
@@ -58,6 +57,14 @@ export class ChatsController {
     async deleteUserFromChat(data: DeleteOrAddUserFromChat) {
         try {
             await this.api.deleteUser(data);
+        } catch (e: any) {
+            console.error(e.message);
+        }
+    }
+
+    async deleteChat(id: number) {
+        try {
+            await this.api.deleteChat(id);
         } catch (e: any) {
             console.error(e.message);
         }

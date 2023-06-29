@@ -9,16 +9,6 @@ import { ChatItem } from '../../components/ChatItem';
 import ChatsController from '../../controllers/ChatsController';
 import { AddDeleteUserPanel } from '../../components/AddDeleteUserPanel';
 
-const tempChat = {chats: [{
-    avatar: null,
-    created_by: 1,
-    id: 1,
-    last_message: null,
-    title: 'default',
-    unread_count: 0
-}]
-}
-
 class Sidebar extends Block {
   constructor(props: ChatProps) {
     super(props);
@@ -32,7 +22,6 @@ class Sidebar extends Block {
         this.props = store.getState();
         if (Boolean(this.props.chats)) {
             this.children.chatList = this.createItems(this.props);
-            //this.children.chatList = this.createItems(tempChat);
         }
         
         this.children.chatModal = new ChatModal({});

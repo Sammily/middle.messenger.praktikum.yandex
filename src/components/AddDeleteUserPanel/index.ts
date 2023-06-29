@@ -1,9 +1,10 @@
 import { Block } from '../../core/Block';
 import template from './addDeleteUserPanel.hbs';
-import { Image } from '../Image';
-import buttonImg from "../../assets/addUserbutton.png";
 import ProfileController from '../../controllers/ProfileController';
 import { Button } from '../../components/Button';
+import ChatsController from '../../controllers/ChatsController';
+import store from '../../core/Store';
+import Router from '../../core/Router';
 
 export class AddDeleteUserPanel extends Block {
     constructor(props: object | undefined) {
@@ -18,8 +19,7 @@ export class AddDeleteUserPanel extends Block {
             events: {
                 click: (evt) => {
                     evt.preventDefault();
-                    const modal = document.querySelector('#addDeleteUser') as HTMLElement;
-                    modal.style.visibility = 'hidden';
+                    this.closeModal();
                 }
             }
         });
@@ -31,10 +31,11 @@ export class AddDeleteUserPanel extends Block {
                     const form = document.getElementById('addDeleteUserForm') as HTMLFormElement;
                     const formData = new FormData(form);
                     this.userName = formData.get('UserName');
-                    const userObj = await ProfileController.searchUser(this.userName as string);
-                    console.log(userObj);
-                    console.log('add user from chat');
-                    //ChatsController.addUserFromChat(testUser);
+                    await ProfileController.searchUser(this.userName as string);
+                    const searchUserData = store.getState().searchUserData;
+                    const currentChat = store.getState().currentChat;
+                    ChatsController.addUserFromChat({ users: [searchUserData[0].id], chatId: currentChat });
+                    Router.go('/messenger');
                 }
             }
         });
@@ -43,16 +44,14 @@ export class AddDeleteUserPanel extends Block {
             buttonClass: 'delete-user-btn', type: 'button', buttonText: 'Удалить пользователя',
             events: {
                 click: async () => {
-                    console.log(this.props);
                     const form = document.getElementById('addDeleteUserForm') as HTMLFormElement;
-                    //console.log(form);
                     const formData = new FormData(form);
                     this.userName = formData.get('UserName');
-                    console.log(this.userName);
-                    const userObj = await ProfileController.searchUser(this.userName as string);
-                    console.log(userObj);
-                    console.log('delete user from chat');
-                    //ChatsController.deleteUserFromChat(testUser);
+                    await ProfileController.searchUser(this.userName as string);
+                    const searchUserData = store.getState().searchUserData;
+                    const currentChat = store.getState().currentChat;
+                    ChatsController.deleteUserFromChat({ users: [searchUserData[0].id], chatId: currentChat });
+                    Router.go('/messenger');
                 }
             }
         });
@@ -62,11 +61,19 @@ export class AddDeleteUserPanel extends Block {
                 click: (evt) => {
                     evt.preventDefault();
                     console.log('delete chat');
+                    console.log(store.getState().currentChat);
+                    ChatsController.deleteChat(store.getState().currentChat);
                     const modal = document.querySelector('#addDeleteUser') as HTMLElement;
                     modal.style.visibility = 'hidden';
+                    Router.go('/messenger');
                 }
             }
         });
+    }
+
+    closeModal() {
+        const modal = document.querySelector('#addDeleteUser') as HTMLElement;
+        modal.style.visibility = 'hidden';
     }
 
     render() {

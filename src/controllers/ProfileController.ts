@@ -39,7 +39,8 @@ export class ProfileController {
 
     async searchUser(login: string) {
         try {
-            await this.api.search(login);
+            const searchUserData = await this.api.search(login);
+            store.set('searchUserData', searchUserData);
         } catch (e: any) {
             console.error(e);
         }

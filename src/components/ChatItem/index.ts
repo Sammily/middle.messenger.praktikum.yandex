@@ -12,10 +12,7 @@ type ChatItemType = {
 export class ChatItem extends Block {
     constructor(props: ChatType & ChatItemType ) {
         super(props);
-
-        store.on(StoreEvents.Updated, () => {
-        this.setProps(store.getState());
-            });
+        
     }
 
     init() {

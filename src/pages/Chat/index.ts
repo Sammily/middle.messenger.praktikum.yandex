@@ -7,6 +7,7 @@ import ChatsController from '../../controllers/ChatsController';
 import { withRouter } from '../../hocs/withRouter';
 import Router from '../../core/Router';
 import { UserType } from 'api/profile';
+import isEqual from '../../utils/isEqual';
 
 export type LastMessage = {
     user: UserType;
@@ -64,8 +65,14 @@ class Chat extends Block {
     }
 
     componentDidUpdate(oldProps: any, newProps: any): boolean {
-        this.children.sidebar = new Sidebar({});
-        return true;
+        if (isEqual(newProps, oldProps)) {
+            return false;
+        } else {
+            this.children.sidebar = new Sidebar({});
+            //this.children.messagePanel = new MessagePanel({});
+            return true;
+        } 
+        
     }
 
     render() {

@@ -44,11 +44,11 @@ export class AuthController {
     try {
         ChatsController.closeAll();
         await this.api.logout();
+        Router.go('/');
         store.set('user', null);
         store.set('chats', null);
         store.set('currentChat', null);
         store.set('messages', null);
-        Router.go('/');
     } catch (e: any) {
         console.error(e);
     }

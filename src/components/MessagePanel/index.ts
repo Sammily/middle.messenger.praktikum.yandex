@@ -9,6 +9,7 @@ import ChatsController from '../../controllers/ChatsController';
 import store, { StoreEvents } from '../../core/Store';
 import { ChatProps, MessageType } from '../../pages/Chat';
 import { Message } from '../../components/Message';
+import isEqual from '../../utils/isEqual';
 
 export type MyID = {
     myId: number;
@@ -19,7 +20,7 @@ class MessagePanel extends Block {
         super(props);
 
         store.on(StoreEvents.Updated, () => {
-            this.setProps(store.getState());
+                this.setProps(store.getState());
         });
     }
     
@@ -53,36 +54,40 @@ class MessagePanel extends Block {
                     const chatID = this.props.currentChat;
                     console.log(chatID, message);
                     ChatsController.sendMessage(chatID, message as string);
-                    this.props.weHaveNew = true;
+                    (document.getElementById('message') as HTMLInputElement).value = '';
                 }
             }
         });
-
     }
 
     componentDidUpdate(oldProps: ChatProps, newProps: ChatProps): boolean {
-        const chatIdChanged = newProps.currentChat !== oldProps.currentChat;
-        const chatSelected = Boolean(newProps.currentChat);
-        if (chatIdChanged && chatSelected) {
-            const currentMessages = newProps.messages![newProps.currentChat!];
-            this.setProps({ message: currentMessages });
-            const chatInfo = newProps.chats!.filter(item => item.id === newProps.currentChat)[0];
-            this.setProps({ chatName: chatInfo.title });
+        if (isEqual(newProps, oldProps)) {
+            return false;
+        } else {
+            const chatIdChanged = newProps.currentChat !== oldProps.currentChat;
+            const chatSelected = Boolean(newProps.currentChat);
+            if (chatIdChanged && chatSelected) {
+                const currentMessages = newProps.messages![newProps.currentChat!];
+                this.setProps({ message: currentMessages });
+                const chatInfo = newProps.chats!.filter(item => item.id === newProps.currentChat)[0];
+                this.setProps({ chatName: chatInfo.title });
+                this.updateMessages();
+            }
+            return true;
         }
-        return true;
     }
 
     updateMessages() {
         if (this.props.message?.length > 0) {
             this.children.msgList = this.props.message.map((msg: MessageType) => {
-                return new Message({ ...msg, myId: store.getState().user.id });
+                return new Message({ ...msg, myId: this.props.user.id });
             })
+        } else {
+            this.children.msgList = new Message(this.props);
         }
     }
    
     render() {
-        this.updateMessages();
-
         return this.compile(template, { ...this.props});
     }
 }
