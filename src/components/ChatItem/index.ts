@@ -1,7 +1,7 @@
 import { Block } from '../../core/Block';
 import template from './chatItem.hbs';
-import store, { StoreEvents } from '../../core/Store';
 import { ChatType } from 'pages/Chat';
+import { Image } from "../../components/Image";
 
 type ChatItemType = {
     events?: {
@@ -27,7 +27,16 @@ export class ChatItem extends Block {
             this.props.time = messageDate;
         }
 
-        this.props.previewMsg = this.props.last_message.content.slice(0,30)+'...';
+        this.props.previewMsg = this.props.last_message.content.slice(0, 30) + '...';
+        
+        if (this.props.avatar) {
+            this.children.avatar = new Image({
+                src: ('https://ya-praktikum.tech/api/v2/resources' + this.props.avatar),
+                alt: "Chat avatar",
+                class: "sidebar-user-chat__user-photo"
+            });
+        }
+       
     }
 
     render() {

@@ -10,6 +10,7 @@ import store, { StoreEvents } from '../../core/Store';
 import { ChatProps, MessageType } from '../../pages/Chat';
 import { Message } from '../../components/Message';
 import isEqual from '../../utils/isEqual';
+import { Modal } from '../../components/Modal';
 
 export type MyID = {
     myId: number;
@@ -26,7 +27,18 @@ class MessagePanel extends Block {
     
     init() {
         store.set('currentChat', 0);
-        this.children.image = new Image({ src: userImg, alt: "user photo", class: "chat-panel__user-photo" });
+
+        this.children.image = new Image({
+            src: (this.props.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + this.props.avatar : userImg),
+            alt: "avatar", class: "chat-panel__user-photo",
+            events: {
+                click: () => {
+                    const modal = document.querySelector('#changeAvatarModal') as HTMLElement;
+                    modal.style.visibility = 'visible';
+                } 
+            }
+        });
+        
         this.children.dotsMenu = new Image({
             src: dotsMenu, alt: "dots menu", class: "chat-panel__dots-menu",
             events: {
@@ -58,6 +70,8 @@ class MessagePanel extends Block {
                 }
             }
         });
+
+        this.children.changeAvatarModal = new Modal({ type: 'chatAvatar' });
     }
 
     componentDidUpdate(oldProps: ChatProps, newProps: ChatProps): boolean {

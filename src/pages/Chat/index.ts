@@ -58,7 +58,7 @@ class Chat extends Block {
         });
     }
     
-    async init() {
+    init() {
         ChatsController.getChats();
         this.children.sidebar = new Sidebar({});
         this.children.messagePanel = new MessagePanel({});

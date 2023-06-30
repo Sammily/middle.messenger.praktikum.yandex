@@ -2,6 +2,9 @@ import { Button } from '../Button';
 import { Block } from '../../core/Block';
 import template from './modal.hbs';
 import ProfileController from "../../controllers/ProfileController";
+import ChatsController from '../../controllers/ChatsController';
+import store from '../../core/Store';
+import chat from 'api/chat';
 
 export class Modal extends Block {
   constructor(props: object | undefined) {
@@ -16,10 +19,16 @@ export class Modal extends Block {
             events: {
                 click: (evt) => {
                     evt.preventDefault();
-                    const form = document.getElementById('modal') as HTMLFormElement;
+                    const form = document.querySelector('.changeAvatarForm') as HTMLFormElement;
                     const formData = new FormData(form);
                     this.avatar = formData.get('avatar');
-                    ProfileController.changeAvatar(new FormData(form));
+                    formData.set('chatId', store.getState().currentChat);
+                    if (this.props.type = 'chatAvatar') {
+                        ChatsController.changeChatAvatar(formData);
+                    } else {
+                        ProfileController.changeAvatar(new FormData(form));
+                    }
+                    
                 }
             }
         });

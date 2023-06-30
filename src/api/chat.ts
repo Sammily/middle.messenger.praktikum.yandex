@@ -41,6 +41,10 @@ export class ChatAPI extends BaseAPI {
     deleteChat(id: number) {
         return this.http.delete('/', { data: { chatId: id }, method: 'delete', timeout: 5000 });
     }
+
+    changeAvatar(data: any) {
+        return this.http.put('/avatar', { data: data, method: 'put', timeout: 5000 });
+    }
     
     update = undefined;
 }

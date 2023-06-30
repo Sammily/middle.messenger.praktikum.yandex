@@ -69,6 +69,14 @@ export class ChatsController {
             console.error(e.message);
         }
     }
+
+    async changeChatAvatar(data: any) {
+        try {
+            await this.api.changeAvatar(data);
+        } catch (e: any) {
+            console.error(e.message);
+        }
+    }
     
 //websocket
   private sockets = new Map();
