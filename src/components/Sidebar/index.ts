@@ -8,6 +8,7 @@ import { ChatProps } from 'pages/Chat';
 import { ChatItem } from '../../components/ChatItem';
 import ChatsController from '../../controllers/ChatsController';
 import { AddDeleteUserPanel } from '../../components/AddDeleteUserPanel';
+import { Search } from '../../components/Search';
 
 class Sidebar extends Block {
   constructor(props: ChatProps) {
@@ -42,7 +43,21 @@ class Sidebar extends Block {
                   Router.go('/settings');
               } 
           }
-        });     
+        });
+        this.children.searchForm = new Search({
+            events: {
+                click: async (event: PointerEvent) => {
+                    event.preventDefault();
+                },
+                submit: async (event: SubmitEvent) => {
+                    event.preventDefault();
+                    const form = document.querySelector('.search__form') as HTMLFormElement;
+                    const formData = new FormData(form);
+                    const filter = formData.get('search');
+                    await ChatsController.getFiltredChats(filter as string);
+                }
+            }
+        }); 
     }
 
     createItems(props: ChatProps) {

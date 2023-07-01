@@ -23,19 +23,35 @@ export class ChatsController {
     return this.api.getToken(id);
   }
 
-  async getChats() {
-      try {
-        const chats = await this.api.read() as ChatsType[];
-          store.set('chats', chats);
-          store.set('currentChat', 0);
-        chats.map(async (chat) => {
+    async getChats() {
+        try {
+            let chats:ChatsType[] = [];
+            chats = await this.api.read() as ChatsType[];
+            store.set('chats', chats);
+            store.set('currentChat', 0);
+            chats.map(async (chat) => {
             const token = await this.getToken(chat.id);
             await this.connect(chat.id, token);
         });
-    } catch (e: any) {
-        console.error(e);
+        } catch (e: any) {
+            console.error(e);
+        }
     }
-  }
+    
+    async getFiltredChats(filter: string) {
+        try {
+            let chats: ChatsType[] = [];
+            chats = await this.api.getFilter(`?title=${filter}%20`) as ChatsType[];
+            store.set('chats', chats);
+            store.set('currentChat', 0);
+            chats.map(async (chat) => {
+            const token = await this.getToken(chat.id);
+            await this.connect(chat.id, token);
+        });
+        } catch (e: any) {
+            console.error(e);
+        }
+    }
 
   async createChat(data: CreateChatType) {
     try {
