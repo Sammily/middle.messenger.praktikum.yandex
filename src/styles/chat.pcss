@@ -127,8 +127,16 @@
   margin-right: 1.0rem;
 }
 
+.dots-menu-container {
+  margin-left: auto;
+}
+
 .chat-panel__dots-menu {
   margin-left: auto;
+}
+
+.chat-panel__dots-menu:hover {
+  cursor: pointer;
 }
 
 .chat-panel__time {
@@ -197,9 +205,11 @@
 }
 
 .message {
+    display: flex;
+    flex-direction: column;
     min-height: 2rem;
     width: 40rem;
-    background-color: #F8F8F8;
+    background-color: #EAEAEA;
     margin-bottom: 2rem;
     margin-left: 2rem;
     border-radius: 1.2rem;
@@ -209,6 +219,7 @@
 
 .time {
     @mixin text #999999, 0.9rem, 1.3rem;
+    align-self: flex-end;
 }
 
 .byUser {
@@ -216,6 +227,8 @@
 }
 
 .my-message {
+    display: flex;
+    flex-direction: column;
     background-color: #E4EDFD;
     min-height: 2rem;
     width: 40rem;

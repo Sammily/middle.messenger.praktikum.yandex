@@ -12,6 +12,7 @@ import ProfileController from "../../controllers/ProfileController";
 import { ChangeUserType } from "api/profile";
 import { Modal } from "../../components/Modal";
 import Router from '../../core/Router';
+import ChatsController from '../../controllers/ChatsController';
 
 export class EditProfile extends Block {
 
@@ -138,7 +139,7 @@ export class EditProfile extends Block {
               Router.go('/messenger');
             }
           } });
-        this.children.modal = new Modal({});
+        this.children.modal = new Modal({type: 'userAvatar'});
         this.children.image = new Image({
             src: (user.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + user.avatar : profilePhoto),
             alt: "Profile photo",
@@ -149,6 +150,27 @@ export class EditProfile extends Block {
                     modal.style.visibility = 'visible';
             }
         } });
+        this.children.modalButton = new Button({
+            buttonClass: 'btn', type: 'submit', buttonText: 'Поменять',
+            events: {
+                click: (evt) => {
+                    evt.preventDefault();
+                    const form = document.querySelector('.changeUserAvatarForm') as HTMLFormElement;
+                    const formData = new FormData(form);
+                    const avatar = formData.get('avatar');
+                    formData.set('chatId', store.getState().currentChat);
+                    ProfileController.changeAvatar(new FormData(form));
+                    this.closeModal();
+                    Router.go('/settings'); 
+                }
+                    
+            }
+        });
+    }
+
+    closeModal() {
+        const modal = document.querySelector('#changeUserAvatarModal') as HTMLElement;
+        modal.style.visibility = 'hidden';
     }
 
     onSubmit() {

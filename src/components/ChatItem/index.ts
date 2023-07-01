@@ -2,6 +2,7 @@ import { Block } from '../../core/Block';
 import template from './chatItem.hbs';
 import { ChatType } from 'pages/Chat';
 import { Image } from "../../components/Image";
+import userImg from "../../assets/usersImg.png";
 
 type ChatItemType = {
     events?: {
@@ -28,14 +29,11 @@ export class ChatItem extends Block {
         }
 
         this.props.previewMsg = this.props.last_message.content.slice(0, 30) + '...';
-        
-        if (this.props.avatar) {
-            this.children.avatar = new Image({
-                src: ('https://ya-praktikum.tech/api/v2/resources' + this.props.avatar),
-                alt: "Chat avatar",
-                class: "sidebar-user-chat__user-photo"
-            });
-        }
+        this.children.avatar = new Image({
+            src: (this.props.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + this.props.avatar : userImg),
+            alt: "Chat avatar",
+            class: "sidebar-user-chat__user-photo"
+        });
        
     }
 

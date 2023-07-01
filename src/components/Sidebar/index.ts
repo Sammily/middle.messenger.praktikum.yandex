@@ -59,7 +59,6 @@ class Sidebar extends Block {
                     const form = document.querySelector('.search__form') as HTMLFormElement;
                     const formData = new FormData(form);
                     const filter = formData.get('search');
-                    console.log(filter);
                     await ChatsController.getFiltredChats(filter as string);
                 }
             }

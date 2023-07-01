@@ -7,7 +7,7 @@ import clipButton from "../../assets/clipButton.png";
 import arrowButton from "../../assets/arrowButton.png";
 import ChatsController from '../../controllers/ChatsController';
 import store, { StoreEvents } from '../../core/Store';
-import { ChatProps, MessageType, MessagesType } from '../../pages/Chat';
+import { ChatProps, MessageType } from '../../pages/Chat';
 import { Message } from '../../components/Message';
 import { Modal } from '../../components/Modal';
 
@@ -68,7 +68,7 @@ class MessagePanel extends Block {
             }
         });
 
-        this.children.changeAvatarModal = new Modal({ type: 'chatAvatar' });
+        this.children.changeAvatarModal = new Modal({});
     }
 
     componentDidUpdate(oldProps: ChatProps, newProps: ChatProps): boolean {

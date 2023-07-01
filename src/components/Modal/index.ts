@@ -4,7 +4,6 @@ import template from './modal.hbs';
 import ProfileController from "../../controllers/ProfileController";
 import ChatsController from '../../controllers/ChatsController';
 import store from '../../core/Store';
-import chat from 'api/chat';
 
 export class Modal extends Block {
   constructor(props: object | undefined) {
@@ -23,12 +22,9 @@ export class Modal extends Block {
                     const formData = new FormData(form);
                     this.avatar = formData.get('avatar');
                     formData.set('chatId', store.getState().currentChat);
-                    if (this.props.type = 'chatAvatar') {
-                        ChatsController.changeChatAvatar(formData);
-                    } else {
-                        ProfileController.changeAvatar(new FormData(form));
-                    }
-                    
+                    ChatsController.changeChatAvatar(formData);
+                    const modal = document.querySelector('#changeAvatarModal') as HTMLElement;
+                    modal.style.visibility = 'hidden';
                 }
             }
         });

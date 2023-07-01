@@ -60,11 +60,8 @@ export class AddDeleteUserPanel extends Block {
             events: {
                 click: (evt) => {
                     evt.preventDefault();
-                    console.log('delete chat');
-                    console.log(store.getState().currentChat);
                     ChatsController.deleteChat(store.getState().currentChat);
-                    const modal = document.querySelector('#addDeleteUser') as HTMLElement;
-                    modal.style.visibility = 'hidden';
+                    this.closeModal();
                     Router.go('/messenger');
                 }
             }

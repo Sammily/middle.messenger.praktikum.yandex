@@ -9,6 +9,7 @@ import { AddDeleteUserPanel } from './components/AddDeleteUserPanel';
 import Chat from './pages/Chat';
 import Router from './core/Router';
 import AuthController from './controllers/AuthController';
+import store from './core/Store';
 
 window.addEventListener('DOMContentLoaded', async() => {
     Router
@@ -21,28 +22,22 @@ window.addEventListener('DOMContentLoaded', async() => {
         .use('/error400', Error400)
         .use('/error500', Error500)
         .use('/addAndDeleteUser', AddDeleteUserPanel)
-        
-    let isProtectedRoute = true;
-
-    switch (window.location.pathname) {
-        case '/':
-        case '/sign-up':
-            isProtectedRoute = false;
-        break;
-    }
 
     try {
         await AuthController.fetchUser();
-        Router.start();
-
-        if (!isProtectedRoute) {
+        if(Boolean(store.getState().user.id)) {
+            Router.start();
             Router.go('/messenger');
+        } else {
+            Router.start();
+            Router.go('/');
         }
     } catch (e) {
         Router.start();
-
-        if (isProtectedRoute) {
-            //Router.go('/');
+        if(Boolean(store.getState().user)) {
+            Router.go('/messenger');
+        } else {
+            Router.go('/');
         }
     }
 });
