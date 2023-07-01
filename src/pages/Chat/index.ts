@@ -47,6 +47,7 @@ export type ChatProps = {
     chats?: ChatType[] | [] | undefined;
     currentChat?: number;
     messages?: MessagesType;
+    message?: MessageType[];
 }
 
 class Chat extends Block {
@@ -65,14 +66,8 @@ class Chat extends Block {
     }
 
     componentDidUpdate(oldProps: any, newProps: any): boolean {
-        if (isEqual(newProps, oldProps)) {
-            return false;
-        } else {
-            this.children.sidebar = new Sidebar({});
-            //this.children.messagePanel = new MessagePanel({});
-            return true;
-        } 
-        
+        this.children.sidebar = new Sidebar({});
+        return true;
     }
 
     render() {

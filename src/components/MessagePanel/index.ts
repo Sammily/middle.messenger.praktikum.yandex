@@ -7,9 +7,8 @@ import clipButton from "../../assets/clipButton.png";
 import arrowButton from "../../assets/arrowButton.png";
 import ChatsController from '../../controllers/ChatsController';
 import store, { StoreEvents } from '../../core/Store';
-import { ChatProps, MessageType } from '../../pages/Chat';
+import { ChatProps, MessageType, MessagesType } from '../../pages/Chat';
 import { Message } from '../../components/Message';
-import isEqual from '../../utils/isEqual';
 import { Modal } from '../../components/Modal';
 
 export type MyID = {
@@ -24,12 +23,11 @@ class MessagePanel extends Block {
                 this.setProps(store.getState());
         });
     }
-    
+
     init() {
         store.set('currentChat', 0);
-
         this.children.image = new Image({
-            src: (this.props.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + this.props.avatar : userImg),
+            src: (userImg),
             alt: "avatar", class: "chat-panel__user-photo",
             events: {
                 click: () => {
@@ -64,7 +62,6 @@ class MessagePanel extends Block {
                     const formData = new FormData(form);
                     const message = formData.get('message');
                     const chatID = this.props.currentChat;
-                    console.log(chatID, message);
                     ChatsController.sendMessage(chatID, message as string);
                     (document.getElementById('message') as HTMLInputElement).value = '';
                 }
@@ -75,20 +72,23 @@ class MessagePanel extends Block {
     }
 
     componentDidUpdate(oldProps: ChatProps, newProps: ChatProps): boolean {
-        if (isEqual(newProps, oldProps)) {
+        const chatIdChanged = newProps.currentChat !== oldProps.currentChat;
+        const chatSelected = Boolean(newProps.currentChat);
+        
+        if (!chatSelected) {
             return false;
-        } else {
-            const chatIdChanged = newProps.currentChat !== oldProps.currentChat;
-            const chatSelected = Boolean(newProps.currentChat);
-            if (chatIdChanged && chatSelected) {
-                const currentMessages = newProps.messages![newProps.currentChat!];
-                this.setProps({ message: currentMessages });
-                const chatInfo = newProps.chats!.filter(item => item.id === newProps.currentChat)[0];
-                this.setProps({ chatName: chatInfo.title });
-                this.updateMessages();
-            }
-            return true;
         }
+
+        const isExistNewMsg = oldProps.message?.length !== newProps.messages?.[newProps.currentChat!].length;
+        if ((chatIdChanged || isExistNewMsg) && chatSelected) {
+            const currentMessages = newProps.messages![newProps.currentChat!];
+            this.setProps({ message: currentMessages });
+            const chatInfo = newProps.chats!.filter(item => item.id === newProps.currentChat)[0];
+            this.setProps({ chatName: chatInfo.title, avatar: chatInfo.avatar });
+            this.updateImg();
+            this.updateMessages();
+        }
+        return true;
     }
 
     updateMessages() {
@@ -99,6 +99,19 @@ class MessagePanel extends Block {
         } else {
             this.children.msgList = new Message(this.props);
         }
+    }
+
+    updateImg() {
+        this.children.image = new Image({
+            src: (this.props.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + this.props.avatar : userImg),
+            alt: "avatar", class: "sidebar-user-chat__user-photo",
+            events: {
+                click: () => {
+                    const modal = document.querySelector('#changeAvatarModal') as HTMLElement;
+                    modal.style.visibility = 'visible';
+                } 
+            }
+        });
     }
    
     render() {
