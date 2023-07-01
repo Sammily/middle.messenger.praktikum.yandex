@@ -27,10 +27,13 @@ class Sidebar extends Block {
         
         this.children.chatModal = new ChatModal({});
         this.children.addOrDeleteUserModal = new AddDeleteUserPanel({});
+         
         this.children.addChat = new Link({
             linkClass: 'addChat', linkText: 'Создать чат',
+            href: '/',
             events: {
-                click: () => {
+                click: (event) => {
+                    event.preventDefault();
                     const modal = document.querySelector('.modal') as HTMLElement;
                     modal.style.visibility = 'visible';
                 } 
@@ -38,8 +41,10 @@ class Sidebar extends Block {
         });
         this.children.profileLink = new Link({
           linkClass: 'chat__link', linkText: 'Профиль >',
+          href: '/profile',
           events: {
-              click: () => {
+                click: (event) => {
+                event.preventDefault();
                   Router.go('/settings');
               } 
           }
@@ -54,6 +59,7 @@ class Sidebar extends Block {
                     const form = document.querySelector('.search__form') as HTMLFormElement;
                     const formData = new FormData(form);
                     const filter = formData.get('search');
+                    console.log(filter);
                     await ChatsController.getFiltredChats(filter as string);
                 }
             }

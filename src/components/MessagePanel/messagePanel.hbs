@@ -9,13 +9,14 @@
       Здесь будут сообщения
     </div>
     {{#each msgList}}
-        {{{this}}}
+    {{{this}}}
     {{/each}}
   </div>
   <div class="chat-panel__send-container">
     <form id="form">
       {{{clipButton}}}
-      <input type="text" placeholder="Сообщение" class="chat-panel__input" name="message" id="message">
+      <input type="text" placeholder="Сообщение" class="chat-panel__input" name="message" id="message"
+        onsubmit="event.preventDefault()">
       <label class="error" id="error">{{error}}</label>
       {{{arrowButton}}}
       {{{changeAvatarModal}}}

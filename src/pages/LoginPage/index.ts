@@ -63,8 +63,10 @@ class LoginPage extends Block {
         });
         this.children.registration = new Link({
             linkClass: 'form__link', linkText: 'Нет аккаунта?',
+            href: '/registration',
             events: {
-                click: () => {
+                click: (event) => {
+                    event.preventDefault();
                     Router.go('/sign-up');
                 } 
             }

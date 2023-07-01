@@ -41,7 +41,7 @@ export class ChatsController {
     async getFiltredChats(filter: string) {
         try {
             let chats: ChatsType[] = [];
-            chats = await this.api.getFilter(`?title=${filter}%20`) as ChatsType[];
+            chats = await this.api.getFilter(`?title=${filter}`) as ChatsType[];
             store.set('chats', chats);
             store.set('currentChat', 0);
             chats.map(async (chat) => {

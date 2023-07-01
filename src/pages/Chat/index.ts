@@ -7,7 +7,6 @@ import ChatsController from '../../controllers/ChatsController';
 import { withRouter } from '../../hocs/withRouter';
 import Router from '../../core/Router';
 import { UserType } from 'api/profile';
-import isEqual from '../../utils/isEqual';
 
 export type LastMessage = {
     user: UserType;

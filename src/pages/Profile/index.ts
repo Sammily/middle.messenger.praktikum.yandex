@@ -68,8 +68,10 @@ class Profile extends Block {
 
         this.children.logout = new Link({
             linkClass: 'red-link', linkText: 'Выйти',
+            href: '/',
             events: {
-                click: () => {
+                click: (event) => {
+                    event.preventDefault();
                     this.clickLogoutBtn();
                 } 
             }
@@ -77,8 +79,10 @@ class Profile extends Block {
 
         this.children.editProfile = new Link({
             linkClass: 'profile__link', linkText: 'Изменить данные',
+            href: '/edit-profile',
             events: {
-                click: () => {
+                click: (event) => {
+                    event.preventDefault();
                     Router.go('/edit-profile');
                 } 
             }
@@ -86,8 +90,10 @@ class Profile extends Block {
 
         this.children.editPassword = new Link({
             linkClass: 'profile__link', linkText: 'Изменить пароль',
+            href: '/edit-password',
             events: {
-                click: () => {
+                click: (event) => {
+                    event.preventDefault();
                     Router.go('/edit-password');
                 } 
             }
