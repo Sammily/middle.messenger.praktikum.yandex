@@ -6,12 +6,24 @@ import { Button } from "../../components/Button";
 import profilePhoto from "../../assets/ProfileImg.png"
 import { Image } from "../../components/Image";
 import { validationPassword } from "../../utils/validation";
+import { withRouter } from "../../hocs/withRouter";
+import store, { StoreEvents } from "../../core/Store";
+import ProfileController from "../../controllers/ProfileController";
+import { PasswordDataType } from "api/profile";
+import Router from '../../core/Router';
 
-export class EditPassword extends Block {
+class EditPassword extends Block {
 
-    constructor(props: object | undefined) {
+    constructor(props: any) {
         super(props);  
+    
+        store.on(StoreEvents.Updated, () => {
+            this.setProps(store.getState());
+        });
     }
+
+    oldPassword: FormDataEntryValue | null = null;
+    newPassword: FormDataEntryValue | null = null;
 
     init() {
         this.children.button = new Button({ buttonClass: 'btn', type: 'submit', buttonText: 'Сохранить', events: 
@@ -22,10 +34,10 @@ export class EditPassword extends Block {
             validationPassword(this.children.input2);
             const form = document.getElementById('form') as HTMLFormElement;
             const formData = new FormData(form);
-            const oldPassword = formData.get('oldPassword');
-            const newPassword = formData.get('newPassword');
+            this.oldPassword = formData.get('oldPassword');
+            this.newPassword = formData.get('newPassword');
             const newPasswordAgain = formData.get('newPasswordAgain');
-            console.log('formData: ', oldPassword, newPassword, newPasswordAgain);
+            this.onSubmit();
         } 
         }  });
         this.children.input = new Input({ forAndName: 'oldPassword', labelClass: 'profile__label', labelText: 'Старый пароль', inputType: 'password', inputClass: 'profile__input', value: '•••••••••', events:
@@ -55,11 +67,26 @@ export class EditPassword extends Block {
             validationPassword(this.children.input2);
         }
 }  });
-        this.children.sideButton = new SideButton({ buttonClass: 'side-btn' });
-        this.children.image = new Image({ src: profilePhoto, alt: "Default profile photo", class: "image" });
+        this.children.sideButton = new SideButton({ buttonClass: 'side-btn', events: {
+            'click': () => {
+              Router.go('/messenger');
+            }
+          } });
+        this.children.image = new Image({
+            src: (store.getState().user.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + store.getState().user.avatar : profilePhoto),
+            alt: "Profile photo",
+            class: "avatar"
+        });
+    }
+
+    onSubmit() {
+        const data = { oldPassword: this.oldPassword, newPassword: this.newPassword};
+        ProfileController.changePassword(data as PasswordDataType);
     }
 
     render() {
         return this.compile(template, this.props);
       }
 }
+
+export default withRouter(EditPassword);

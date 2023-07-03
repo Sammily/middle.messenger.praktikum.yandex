@@ -1,17 +1,17 @@
-    <main class="container profile">
-        {{{sideButton}}}
-        {{{image}}}
-        <h5 class="profile__header">Иван</h5>
-        <form class="profile__inputs-container">
-                {{{input}}}
-                {{{input1}}}
-                {{{input2}}}
-                {{{input3}}}
-                {{{input4}}}
-                {{{input5}}}
-                {{{input6}}}
-        </form>
-        <a class="profile__link" href="./editProfile.hbs">Изменить данные</a>
-        <a class="profile__link" href="./editPassword.hbs">Изменить пароль</a>
-        <a class="profile__link red-link" href="/">Выйти</a>
-    </main>
+<main class="container profile">
+    {{{sideButton}}}
+    {{{image}}}
+    <h5 class="profile__header">{{{name}}}</h5>
+    <form class="profile__inputs-container">
+        {{{input}}}
+        {{{input1}}}
+        {{{input2}}}
+        {{{input3}}}
+        {{{input4}}}
+        {{{input5}}}
+        {{{input6}}}
+    </form>
+    {{{editProfile}}}
+    {{{editPassword}}}
+    {{{logout}}}
+</main>
