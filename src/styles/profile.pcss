@@ -2,8 +2,12 @@
     align-items: center;
 }
 
-.image {
+.avatar {
     margin-bottom: 2.1rem;
+    width: 13.0rem;
+    height: 13.0rem;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .profile__header {
@@ -23,10 +27,25 @@
     button {
         align-self: center;
     }
+
+    .input-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0;
+    }
 }
 
-.disabled {
+.profile__input-disabled {
     pointer-events: none;
+    border: none;
+    outline: none;
+    border-bottom: 0.1rem solid var(--profile-input-border);
+    width: 51.0rem;
+    margin-bottom: 1.0rem;
+    @mixin text #999999, 1.3rem, 1.3rem;
+    text-align: right;
+    padding-bottom: 1rem;
 }
 
 .profile__label {
@@ -58,4 +77,13 @@
 
 .red-link {
     @mixin text #FF0000, 1.3rem, 1.3rem;
+    text-decoration: none;
+    margin-bottom: 2.1rem;
+    margin-left: 0;
+    margin-right: auto;
 }
+
+.red-link:hover {
+    cursor: pointer;
+}
+
