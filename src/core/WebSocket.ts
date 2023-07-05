@@ -47,17 +47,5 @@ export default class WS extends EventBus {
         socket.addEventListener('close', () => {
             this.emit('close');
         });
-
-    }
-
-    ping() {
-        this.interval = setInterval(() => {
-            this.send({ type: 'ping' });
-        }, 5000);
-    
-        this.on('close', () => {
-            clearInterval(this.interval);
-            this.interval = 0;
-        });
     }
 }
