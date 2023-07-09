@@ -7,7 +7,7 @@
  - Анализаторы кода: Eslint и Stylelint
  - Обмен сообщениями: WebSocket
 
-[**Deploy**](https://unrivaled-kulfi-ba83f2.netlify.app/)
+[**Deploy**](https://chat-a94u.onrender.com)
 
 Команды:
 - `npm install` — чтобы установить зависимости
