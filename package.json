@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "---",
   "scripts": {
-    "dev": "parcel --no-cache ./src/index.html",
     "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
-    "start": "parcel --port 3000 --open",
     "build": "webpack  && node ./server.js",
     "prepare": "husky install"
   },
@@ -43,7 +41,6 @@
     "jsdom": "^22.1.0",
     "mini-css-extract-plugin": "^2.7.6",
     "mocha": "^10.2.0",
-    "parcel": "^2.8.3",
     "postcss": "^8.4.23",
     "postcss-import": "^15.1.0",
     "postcss-loader": "^7.3.3",
