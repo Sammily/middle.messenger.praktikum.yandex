@@ -12,4 +12,5 @@
 Команды:
 - `npm install` — чтобы установить зависимости
 - `npm run test` — запуск тестов
-- `npm run build` — сборка версии и запуск Express сервера
+- `npm run build` — сборка версии
+- `npm run start` — запуск Express сервера

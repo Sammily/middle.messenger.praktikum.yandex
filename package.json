@@ -4,7 +4,8 @@
   "description": "---",
   "scripts": {
     "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
-    "build": "webpack  && node ./server.js",
+    "build": "webpack",
+    "start": "node ./server.js",
     "prepare": "husky install"
   },
   "repository": {
