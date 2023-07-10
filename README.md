@@ -14,3 +14,7 @@
 - `npm run test` — запуск тестов
 - `npm run build` — сборка версии
 - `npm run start` — запуск Express сервера
+- `npm run lint` — запуск eslint
+- `npm run stylelint` — запуск stylelint
+
+- `git add .husky/pre-commit` — pre-commit

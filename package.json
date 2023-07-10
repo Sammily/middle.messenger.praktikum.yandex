@@ -4,9 +4,12 @@
   "description": "---",
   "scripts": {
     "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
-    "build": "webpack",
-    "start": "node ./server.js",
-    "prepare": "husky install"
+    "build": "webpack --config ./webpack.config.js --env mode=prod",
+    "dev": "webpack serve --open --config ./webpack.config.js --env mode=dev",
+    "start": "node './server.js'",
+    "prepare": "husky install",
+    "lint": "npx eslint . --quiet",
+    "stylelint": "npx stylelint ./src/**/*.{css,pcss}"
   },
   "repository": {
     "type": "git",
@@ -58,7 +61,8 @@
     "typescript": "^5.0.4",
     "uuid": "^9.0.0",
     "webpack": "^5.88.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
     "handlebars": "^4.7.7",

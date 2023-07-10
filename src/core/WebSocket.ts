@@ -2,7 +2,7 @@ import { EventBus } from './eventBus';
 
 export default class WS extends EventBus {
     private socket: WebSocket | null = null;
-    interval: number = 0;
+    interval = 0;
 
     constructor(private url: string) {
         super();

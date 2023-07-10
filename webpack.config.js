@@ -1,9 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { merge } = require('webpack-merge');
 
-module.exports = {
+const baseConfig = {
     mode: 'development',
     entry: {
         main: path.resolve(__dirname, './src/index.ts'),
@@ -55,3 +56,9 @@ module.exports = {
         new CleanWebpackPlugin(),
     ],
 }
+
+module.exports = ({ mode }) => {
+    const isProductionMode = mode === 'prod';
+    const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
+    return merge(baseConfig, envConfig);
+};
