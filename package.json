@@ -6,7 +6,7 @@
     "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
     "build": "webpack --config ./webpack.config.js --env mode=prod",
     "dev": "webpack serve --open --config ./webpack.config.js --env mode=dev",
-    "start": "node ./server.js",
+    "start": "npm run build && node ./server.js",
     "prepare": "husky install",
     "lint": "npx eslint . --quiet",
     "stylelint": "npx stylelint ./src/**/*.{css,pcss}"
