@@ -1,12 +1,13 @@
 const express = require('express');
-const fallback = require('express-history-api-fallback');
+const path = require('path');
 const PORT = 3000;
 
 const app = express();
 const root = __dirname + "/dist";
 app.use(express.static(root));
-app.use(fallback("index.html", { root }));
-
+app.get("*/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 app.listen(PORT, () => {
   console.log(`Мой текст в логе после запуска ${PORT}!`);
 });
